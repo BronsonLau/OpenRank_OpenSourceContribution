@@ -1,0 +1,44 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #ebeceb;
+    color: #393535;
+}
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.chart-container {
+    
+    margin: 10px;
+    background-color: #f1d2d2;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: relative;
+}
+
+/* 可以为不同图表容器添加特定样式 */
+#chart1 {
+    background-color: #c1f1ca;
+    width: 33%; /* 根据需要调整 */
+    height: 200px; /* 根据需要调整 */
+}
+
+#chart2 {
+    background-color: #c1f1ca;
+    width: 33%; /* 根据需要调整 */
+    height: 200px; /* 根据需要调整 */
+}
+
