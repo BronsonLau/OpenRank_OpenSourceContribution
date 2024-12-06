@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR&Commit数据驾驶舱</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 用于绘制图表-->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>  <!-- D3.js 是一个强大的数据可视化库，用于创建动态、交互式的数据图形。 -->
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <div class="header-left">
+                <div class="author-info">
+                    <div>作者:key</div>
+                    <div>华东师范大学数据科学与工程学院</div>
+                </div>
+                <h1>PR&Commit数据驾驶舱</h1>
+            </div>
+            <div class="header-right">
+                <div class="repo-name">BronsonLau/OpenRank_OpenSourceContribution</div>
+                <div class="search-container">
+                    <input type="text" placeholder="请输入仓库名" id="search-input">
+                    <button id="search-button">搜索</button>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="left-column">
+                <div class="card">
+                    <h2>项目语言分布</h2>
+                    <canvas id="language-chart"></canvas>  <!-- 使用 <canvas> 元素来渲染一个图表，显示项目中使用的编程语言的分布情况。-->
+                </div>
+            </div>
+
+            <div class="center-column">
+                <div class="metrics-overview">
+                    <div class="metric-card">
+                        <h3>Star</h3>
+                        <p id="star-count">108380</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Fork</h3>
+                        <p id="fork-count">49195</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>使用人数</h3>
+                        <p id="user-count">38251</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>PR</h3>
+                        <p id="pr-count">13208</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Issue</h3>
+                        <p id="issue-count">25832</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>贡献者数量</h3>
+                        <p id="contributor-count">1890</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>数据统计</h2>
+                    <canvas id="activity-chart"></canvas>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="card">
+                    <h2>贡献者列表</h2>
+                    <table id="contributor-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>月份</th>
+                                <th>贡献人</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table rows will be added dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="card">
+                <h2>年度活跃值</h2>
+                <canvas id="yearly-activity-chart"></canvas>
+            </div>
+            
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
