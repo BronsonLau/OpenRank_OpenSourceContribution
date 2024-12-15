@@ -34,9 +34,12 @@ function parseQuarterData(data) {
 }
 
 async function fetchData() {
-    const repo = document.getElementById('repoInput').value;
-    const errorElement = document.getElementById('error');
-    errorElement.textContent = '';
+    const repo = document.getElementById('repoInput').value.trim();
+
+    if (!repo) {
+        alert('请输入仓库名。');
+        return;
+    }
 
     try {
         const response = await fetch(`https://oss.x-lab.info/open_digger/github/${repo}/openrank.json`);
@@ -56,7 +59,7 @@ async function fetchData() {
         // 初始加载图表
         updateChart();
     } catch (error) {
-        errorElement.textContent = 'Error fetching data. Please check the repository name and try again.';
+        alert('获取数据时出错，请输入正确存储库名称！');
         console.error('Error:', error);
     }
 }
