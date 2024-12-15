@@ -1,119 +1,140 @@
-// Language Distribution Chart
-const languageCtx = document.getElementById('language-chart').getContext('2d');
-new Chart(languageCtx, {
-    type: 'doughnut',
-    data: {
-        labels: ['H', 'JavaScript', 'CSS'],
-        datasets: [{
-            data: [89.37, 9.51, 1.07],
-            backgroundColor: ['#007ACC', '#F1E05A', '#563D7C'],
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'bottom',
-            }
-        },
-        cutout: '70%'
-    }
-});
+let openRankChart;
+let yearData = [];
+let monthData = [];
+let quarterData = [];
 
-// Activity Timeline Chart
-const activityCtx = document.getElementById('activity-chart').getContext('2d');
-new Chart(activityCtx, {
-    type: 'line',
-    data: {
-        labels: Array.from({length: 24}, (_, i) => `2022-${String(i + 1).padStart(2, '0')}`),
-        datasets: [{
-            label: '活动数',
-            data: Array.from({length: 24}, () => Math.floor(Math.random() * 5000) + 1000),
-            borderColor: '#4cc9f0',
-            tension: 0.4
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
+// 获取 URL 参数
+function getUrlParam(param, defaultValue) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.has(param) ? urlParams.get(param) : defaultValue;
+}
+
+// 转换年份、月份、季度数据为时间序列
+function parseYearData(data) {
+    return Object.entries(data)
+        .filter(([key]) => key.length === 4) // 过滤年份数据
+        .map(([year, value]) => ({ x: new Date(`${year}-01-01`), y: value }));
+}
+
+function parseMonthData(data) {
+    return Object.entries(data)
+        .filter(([key]) => key.length === 7 && key.includes('-')) // 过滤年月数据
+        .map(([month, value]) => ({ x: new Date(`${month}-01`), y: value }));
+}
+
+function parseQuarterData(data) {
+    return Object.entries(data)
+        .filter(([key]) => key.length === 6 && key.includes('Q')) // 过滤季度数据
+        .map(([quarter, value]) => {
+            const year = quarter.slice(0, 4);
+            const quarterNum = quarter.slice(5);
+            const month = (quarterNum - 1) * 3 + 1; // 获取季度的第一月
+            return { x: new Date(`${year}-${month < 10 ? '0' : ''}${month}-01`), y: value };
+        });
+}
+
+async function fetchData() {
+    const repo = document.getElementById('repoInput').value;
+    const errorElement = document.getElementById('error');
+    errorElement.textContent = '';
+
+    try {
+        const response = await fetch(`https://oss.x-lab.info/open_digger/github/${repo}/openrank.json`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
         }
-    }
-});
+        const data = await response.json();
 
-// Yearly Activity Chart
-const yearlyActivityCtx = document.getElementById('yearly-activity-chart').getContext('2d');
-new Chart(yearlyActivityCtx, {
-    type: 'radar',
-    data: {
-        labels: ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015'],
-        datasets: [{
-            label: '年度活跃度',
-            data: [80, 90, 85, 70, 75, 80, 85, 75, 70],
-            backgroundColor: 'rgba(76, 201, 240, 0.2)',
-            borderColor: '#4cc9f0',
-            pointBackgroundColor: '#4cc9f0',
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            r: {
-                angleLines: {
-                    color: 'rgba(255, 255, 255, 0.1)'
+        // 分别解析年份、月份和季度的数据
+        yearData = parseYearData(data);
+        monthData = parseMonthData(data);
+        quarterData = parseQuarterData(data);
+
+        // 更新仓库名称
+        document.getElementById('repo-name').textContent = repo;
+
+        // 初始加载图表
+        updateChart();
+    } catch (error) {
+        errorElement.textContent = 'Error fetching data. Please check the repository name and try again.';
+        console.error('Error:', error);
+    }
+}
+
+function updateChart() {
+    const chartSelector = document.getElementById('chartSelector').value;
+
+    // 销毁旧的图表
+    if (openRankChart) {
+        openRankChart.destroy();
+    }
+
+    let chartData = [];
+    let chartLabel = '';
+
+    // 根据选择的图表类型更新数据
+    if (chartSelector === 'year') {
+        chartData = yearData;
+        chartLabel = 'OpenRank - Year';
+    } else if (chartSelector === 'month') {
+        chartData = monthData;
+        chartLabel = 'OpenRank - Month';
+    } else if (chartSelector === 'quarter') {
+        chartData = quarterData;
+        chartLabel = 'OpenRank - Quarter';
+    }
+
+    // 创建新图表
+    const ctx = document.getElementById('openRankChart').getContext('2d');
+    openRankChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: chartLabel,
+                data: chartData,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                tooltip: {
+                    enabled: true,
+                    mode: 'nearest', // 最接近的点
+                    intersect: false, // 鼠标是否必须直接穿越数据点
+                    callbacks: {
+                        // 自定义 tooltip 内容
+                        label: function(tooltipItem) {
+                            const value = tooltipItem.raw.y;
+                            return `${tooltipItem.label}: ${value.toFixed(2)}`; // 保留两位小数
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: chartSelector === 'year' ? 'year' : chartSelector === 'month' ? 'month' : 'quarter',
+                        tooltipFormat: 'll',
+                    },
+                    title: {
+                        display: true,
+                        text: chartSelector === 'year' ? 'Year' : chartSelector === 'month' ? 'Month' : 'Quarter'
+                    }
                 },
-                grid: {
-                    color: 'rgba(255, 255, 255, 0.1)'
-                },
-                pointLabels: {
-                    color: '#9ca3af'
-                },
-                ticks: {
-                    color: '#9ca3af',
-                    backdropColor: 'transparent'
+                y: {
+                    title: {
+                        display: true,
+                        text: 'OpenRank'
+                    },
+                    beginAtZero: true
                 }
             }
         }
-    }
-});
+    });
+}
 
-
-
-
-
-
-
-
-// Contributor Table
-const contributorData = [
-    {id: 44, date: '2023-02', name: 'LukasDc'},
-    {id: 45, date: '2023-02', name: 'OriginRing'},
-    {id: 46, date: '2023-02', name: 'Lioness100'},
-    {id: 47, date: '2023-02', name: 'Wadefeng1'},
-    {id: 48, date: '2023-02', name: 'susu-hu'},
-];
-
-const tableBody = document.querySelector('#contributor-table tbody');
-contributorData.forEach(contributor => {
-    const row = tableBody.insertRow();
-    row.insertCell().textContent = contributor.id;
-    row.insertCell().textContent = contributor.date;
-    row.insertCell().textContent = contributor.name;
-});
-
-
-
-// Search functionality
-const searchInput = document.getElementById('search-input');
-const searchButton = document.getElementById('search-button');
-
-searchButton.addEventListener('click', () => {
-    const searchTerm = searchInput.value;
-    // Here you would typically make an API call to fetch data for the new repository
-    console.log(`Searching for: ${searchTerm}`);
-    // Then update all the charts and data with the new information
-});
-
-
+// 初始图表生成
+fetchData();
