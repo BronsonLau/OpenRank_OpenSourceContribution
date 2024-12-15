@@ -2,12 +2,12 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #0a0b1b;
-  color: #ffffff;
+  background-color: #0a0b1b; /* 深色背景 */
+  color: #ffffff; /* 白色字体 */
 }
 
-.dashboard {       /* 最大宽度为 1800px，并水平居中显示，内边距为 20px */
-  max-width: 1800px; 
+.dashboard {
+  max-width: 1800px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -36,7 +36,7 @@ h1 {
 }
 
 .repo-name {
-  color: #4cc9f0;
+  color: #4cc9f0; /* 蓝色 */
   margin-right: 20px;
 }
 
@@ -44,7 +44,7 @@ h1 {
   display: flex;
 }
 
-#search-input {
+#repoInput {
   padding: 5px;
   border: 1px solid #333;
   background-color: transparent;
@@ -53,10 +53,14 @@ h1 {
 
 #search-button {
   padding: 5px 10px;
-  background-color: #4cc9f0;
+  background-color: #4cc9f0; /* 蓝色 */
   border: none;
   color: #fff;
   cursor: pointer;
+}
+
+#search-button:hover {
+  background-color: #3e9cb8; /* 蓝色按钮悬停 */
 }
 
 main {
@@ -65,12 +69,16 @@ main {
   margin-top: 20px;
 }
 
-.left-column, .center-column, .right-column {
-  width: 32%;
+.left-column {
+  width: 48%;
+}
+
+.right-column {
+  width: 48%;
 }
 
 .card {
-  background-color: #0d0e2a;
+  background-color: #0d0e2a; /* 卡片背景 */
   border-radius: 5px;
   padding: 20px;
   margin-bottom: 20px;
@@ -79,7 +87,7 @@ main {
 h2 {
   font-size: 1em;
   margin-top: 0;
-  color: #9ca3af;
+  color: #9ca3af; /* 浅灰色 */
 }
 
 .metrics-overview {
@@ -89,7 +97,7 @@ h2 {
 }
 
 .metric-card {
-  background-color: #0d0e2a;
+  background-color: #0d0e2a; /* 卡片背景 */
   border-radius: 5px;
   padding: 10px;
   text-align: center;
@@ -98,13 +106,13 @@ h2 {
 .metric-card h3 {
   font-size: 0.8em;
   margin: 0;
-  color: #9ca3af;
+  color: #9ca3af; /* 浅灰色 */
 }
 
 .metric-card p {
   font-size: 1.5em;
   margin: 5px 0 0;
-  color: #4cc9f0;
+  color: #4cc9f0; /* 蓝色 */
 }
 
 #contributor-table {
@@ -119,7 +127,7 @@ h2 {
 }
 
 #contributor-table th {
-  color: #9ca3af;
+  color: #9ca3af; /* 浅灰色 */
 }
 
 footer {
@@ -148,4 +156,140 @@ footer .card {
 
 #contribution-heatmap {
   height: 200px;
+}
+
+/* Media Queries for responsive design */
+
+/* 手机设备 */
+@media (max-width: 767px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .repo-name {
+    margin-right: 0;
+    margin-top: 10px;
+  }
+
+  .search-container {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  #repoInput {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #search-button {
+    width: 100%;
+  }
+
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .metrics-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-card p {
+    font-size: 1.2em;
+  }
+}
+
+/* 平板设备（适应中等屏幕，如ipad） */
+@media (min-width: 768px) and (max-width: 1024px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .metrics-overview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metric-card p {
+    font-size: 1.4em;
+  }
+
+  .card {
+    padding: 15px;
+  }
+}
+
+/* 大屏设备（适应大于1024px的设备，如桌面显示器） */
+@media (min-width: 1025px) {
+  main {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .left-column {
+    width: 48%;
+    padding-right: 20px;
+  }
+
+  .right-column {
+    width: 48%;
+    padding-left: 20px;
+  }
+
+  .metrics-overview {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  #openRankChart {
+    width: 100%;
+    height: auto;
+  }
+}
+.myscroll {
+  height: 200px; /* 设置容器的高度 */
+  overflow: hidden; /* 隐藏超出的内容 */
+}
+
+.myscroll ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  transition: transform 1s ease-in-out; /* 平滑过渡效果 */
+}
+
+.myscroll li {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fontInner {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.gun span {
+  margin-right: 10px;
 }
