@@ -41,7 +41,11 @@ h1 {
 }
 
 .search-container {
+  width: 100%;
+  margin-bottom: 20px;
   display: flex;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 #repoInput {
@@ -49,6 +53,8 @@ h1 {
   border: 1px solid #333;
   background-color: transparent;
   color: #fff;
+  flex: 1;
+  border-radius: 5px;
 }
 
 #search-button {
@@ -57,16 +63,37 @@ h1 {
   border: none;
   color: #fff;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 #search-button:hover {
-  background-color: #3e9cb8; /* 蓝色按钮悬停 */
+  background-color: #3e9cb8;
+}
+
+.data-type-select {
+    padding: 5px;
+    border: 1px solid #333;
+    background-color: #1a1b3a;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+.data-type-select:hover {
+    border-color: #4cc9f0;
+}
+
+.data-type-select option {
+    background-color: #0d0e2a;
+    color: #fff;
 }
 
 main {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  flex-wrap: wrap;  /* 让内容在小屏幕下换行 */
 }
 
 .left-column {
@@ -130,37 +157,7 @@ h2 {
   color: #9ca3af; /* 浅灰色 */
 }
 
-footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-footer .card {
-  width: 48%;
-}
-
-#contributor-cloud {
-  height: 300px;
-  position: relative;
-}
-
-#contributor-cloud span {
-  position: absolute;
-  white-space: nowrap;
-}
-
-#dependency-graph {
-  height: 300px;
-}
-
-#contribution-heatmap {
-  height: 200px;
-}
-
-/* Media Queries for responsive design */
-
-/* 手机设备 */
+/* 响应式设计 */
 @media (max-width: 767px) {
   header {
     flex-direction: column;
@@ -179,6 +176,7 @@ footer .card {
   .search-container {
     margin-top: 10px;
     width: 100%;
+    flex-direction: column;
   }
 
   #repoInput {
@@ -190,13 +188,16 @@ footer .card {
     width: 100%;
   }
 
+  .data-type-select {
+    width: 100%;
+  }
+
   main {
     flex-direction: column;
     align-items: center;
   }
 
-  .left-column,
-  .right-column {
+  .left-column, .right-column {
     width: 100%;
     margin-bottom: 20px;
   }
@@ -210,86 +211,65 @@ footer .card {
   }
 }
 
-/* 平板设备（适应中等屏幕，如ipad） */
 @media (min-width: 768px) and (max-width: 1024px) {
   main {
     flex-direction: column;
     align-items: center;
   }
 
-  .left-column,
-  .right-column {
+  .left-column, .right-column {
     width: 100%;
     margin-bottom: 20px;
   }
 
   .metrics-overview {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .metric-card p {
-    font-size: 1.4em;
-  }
-
-  .card {
-    padding: 15px;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* 大屏设备（适应大于1024px的设备，如桌面显示器） */
-@media (min-width: 1025px) {
-  main {
+.chart-selector {
     display: flex;
-    justify-content: space-between;
-  }
-
-  .left-column {
-    width: 48%;
-    padding-right: 20px;
-  }
-
-  .right-column {
-    width: 48%;
-    padding-left: 20px;
-  }
-
-  .metrics-overview {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .card {
-    padding: 20px;
-  }
-
-  #openRankChart {
-    width: 100%;
-    height: auto;
-  }
-}
-.myscroll {
-  height: 200px; /* 设置容器的高度 */
-  overflow: hidden; /* 隐藏超出的内容 */
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.myscroll ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  transition: transform 1s ease-in-out; /* 平滑过渡效果 */
+.chart-button {
+    padding: 8px 15px;
+    margin: 0 3px;
+    background-color: #1a1b3a;
+    border: 1px solid #4cc9f0;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 14px;
+    border-radius: 5px;
+    width: auto; /* Allow the button to size based on content */
+    min-width: 100px; /* Set a minimum width */
+    max-width: 150px; /* Set a maximum width */
 }
 
-.myscroll li {
-  padding: 10px 0;
-  display: flex;
-  justify-content: space-between;
+.chart-button:hover {
+    background-color: #4cc9f0;
+    color: #0a0b1b;
 }
 
-.fontInner {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
+.chart-button.active {
+    background-color: #4cc9f0;
+    color: #0a0b1b;
 }
 
-.gun span {
-  margin-right: 10px;
+@media (max-width: 767px) {
+  .chart-selector {
+    flex-direction: row; /* Change to row for better space utilization */
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping for very small screens */
+  }
+
+  .chart-button {
+    margin: 5px;
+    width: auto;
+    min-width: 80px; /* Slightly smaller minimum width for mobile */
+    max-width: 120px; /* Slightly smaller maximum width for mobile */
+  }
 }
+
