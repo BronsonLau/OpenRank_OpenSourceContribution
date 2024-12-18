@@ -3,21 +3,23 @@ let yearData = [];
 let monthData = [];
 let quarterData = [];
 
+let userChart;
+let userYearData = [];
+let userMonthData = [];
+let userQuarterData = [];
+
 // 获取数据类型的显示名称
 function getDataTypeLabel(dataType) {
     const labels = {
         'openrank': 'OpenRank',
         'activity': 'Activity',
         'attention': 'Attention',
-        'active_dates_and_times': 'Active dates and times',
         'stars': 'Stars',
         'technical_fork': 'Technical fork',
         'participants': 'Participants',
         'new_contributors': 'New contributors',
-        'new_contributors_detail': '新贡献者详情',
         'inactive_contributors': 'Inactive contributors',
         'bus_factor': 'Bus factor',
-        'bus_factor_detail': '巴士因子详情',
         'issues_new': 'Issues new',
         'issues_closed': 'Issues closed',
         'issue_comments': 'Issue comments',
@@ -25,7 +27,7 @@ function getDataTypeLabel(dataType) {
         'issue_resolution_duration': 'Issue resolution duration',
         'issue_age': 'Issue age',
         'code_change_lines_add': 'Code change lines',
-        'code_change_lines_remove': '代码删除行数',
+        'code_change_lines_remove': 'code_change_lines_remove',
         'code_change_lines_sum': '代码变更总行数',
         'change_requests': 'Change requests',
         'change_requests_accepted': 'Change requests accepted',
@@ -44,6 +46,12 @@ function updateChartTitle() {
     const dataType = document.getElementById('dataTypeSelector').value;
     const label = getDataTypeLabel(dataType);
     document.getElementById('chartTitle').textContent = `GitHub ${label} Chart`;
+}
+
+function updateSecondChartTitle() {
+    const dataType = document.getElementById('dataTypeSelector2').value;
+    const label = getDataTypeLabel(dataType);
+    document.getElementById('chartTitle2').textContent = `GitHub User ${label} Chart`;
 }
 
 // 获取 URL 参数
@@ -80,10 +88,10 @@ async function fetchData() {
     const repo = document.getElementById('repoInput').value.trim();
     const dataType = document.getElementById('dataTypeSelector').value;
 
-    if (!repo) {
-        alert('请输入仓库名。');
-        return;
-    }
+    // if (!repo) {
+    //     alert('请输入仓库名。');
+    //     return;
+    // }
 
     try {
         const response = await fetch(`https://oss.x-lab.info/open_digger/github/${repo}/${dataType}.json`);
@@ -108,6 +116,38 @@ async function fetchData() {
         updateChart('year'); // Default to year chart
     } catch (error) {
         alert('获取数据时出错，请检查仓库名称或数据类型！');
+        console.error('Error:', error);
+    }
+}
+
+async function fetchUserData() {
+    const username = document.getElementById('userInput').value.trim();
+    const dataType = document.getElementById('dataTypeSelector2').value;
+
+    // if (!username) {
+    //     alert('请输入用户名。');
+    //     return;
+    // }
+
+    try {
+        const response = await fetch(`https://oss.x-lab.info/open_digger/github/${username}/${dataType}.json`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+
+        // Parse data for different time periods
+        userYearData = parseYearData(data);
+        userMonthData = parseMonthData(data);
+        userQuarterData = parseQuarterData(data);
+
+        // Update chart title
+        updateSecondChartTitle();
+
+        // Initialize with year data
+        updateSecondChart('year');
+    } catch (error) {
+        alert('获取数据时出错，请检查用户名或数据类型！');
         console.error('Error:', error);
     }
 }
@@ -182,6 +222,76 @@ function updateChart(chartType = 'year') {
     });
 }
 
+function updateSecondChart(chartType = 'year') {
+    // Destroy existing chart
+    if (userChart) {
+        userChart.destroy();
+    }
+
+    let chartData = [];
+    const dataType = document.getElementById('dataTypeSelector2').value;
+    const chartLabel = getDataTypeLabel(dataType);
+
+    // Select data based on chart type
+    if (chartType === 'year') {
+        chartData = userYearData;
+    } else if (chartType === 'month') {
+        chartData = userMonthData;
+    } else if (chartType === 'quarter') {
+        chartData = userQuarterData;
+    }
+
+    // Create new chart
+    const ctx = document.getElementById('userChart').getContext('2d');
+    userChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: chartLabel,
+                data: chartData,
+                borderColor: 'rgb(255, 99, 132)', // Different color from first chart
+                tension: 0.2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                tooltip: {
+                    enabled: true,
+                    mode: 'nearest',
+                    intersect: false,
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            const value = tooltipItem.raw.y;
+                            return `${tooltipItem.label}: ${value.toFixed(2)}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: chartType === 'year' ? 'year' : chartType === 'month' ? 'month' : 'quarter',
+                        tooltipFormat: 'll',
+                    },
+                    title: {
+                        display: true,
+                        text: chartType === 'year' ? 'Year' : chartType === 'month' ? 'Month' : 'Quarter'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: chartLabel
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
 function setupChartButtons() {
     const buttons = document.querySelectorAll('.chart-button');
     buttons.forEach(button => {
@@ -196,6 +306,8 @@ function setupChartButtons() {
 // Initial setup
 document.addEventListener('DOMContentLoaded', function() {
     updateChartTitle();
-    fetchData();
+    updateSecondChartTitle();
+    // fetchData();
+    // fetchUserData();
 });
 

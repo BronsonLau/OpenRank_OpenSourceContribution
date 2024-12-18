@@ -42,31 +42,41 @@ h1 {
 
 .search-container {
   width: 100%;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    align-items: center; /* 确保垂直居中对齐 */
+    flex-wrap: nowrap; /* 防止元素换行 */
+  
 }
 
-#repoInput {
+.search-container > * {
+  flex: 1 1 auto;
+}
+
+#repoInput, #userInput, .data-type-select {
   padding: 5px;
   border: 1px solid #333;
   background-color: transparent;
   color: #fff;
-  flex: 1;
+  min-width: 120px;
+  flex-grow: 1;
   border-radius: 5px;
 }
 
-#search-button {
+#search-button, #search-button2 {
   padding: 5px 10px;
   background-color: #4cc9f0; /* 蓝色 */
   border: none;
   color: #fff;
   cursor: pointer;
-  margin-left: 10px;
+  border-radius: 5px;
+  min-width: 80px;
+  flex-grow: 0;
 }
 
-#search-button:hover {
+#search-button:hover, #search-button2:hover {
   background-color: #3e9cb8;
 }
 
@@ -87,6 +97,33 @@ h1 {
 .data-type-select option {
     background-color: #0d0e2a;
     color: #fff;
+}
+
+.data-type-select,
+#dataTypeSelector,
+#dataTypeSelector2 {
+    width: 150px;  /* Set fixed width for both dropdowns */
+    min-width: 150px;
+    max-width: 150px;
+    height: 36px;  /* Set fixed height for both dropdowns */
+    padding: 5px 10px;
+    flex: none;    /* Prevent flex growth/shrink */
+}
+
+/* Ensure input fields take remaining space */
+#repoInput,
+#userInput {
+    flex: 1;
+    height: 36px;  /* Match height with dropdowns */
+    padding: 5px 10px;
+}
+
+/* Adjust search buttons to match height */
+#search-button,
+#search-button2 {
+    height: 36px;
+    padding: 0 20px;
+    white-space: nowrap;
 }
 
 main {
@@ -178,17 +215,13 @@ h2 {
     width: 100%;
     flex-direction: column;
   }
-
-  #repoInput {
+  
+  .search-container > * {
     width: 100%;
     margin-bottom: 10px;
   }
-
-  #search-button {
-    width: 100%;
-  }
-
-  .data-type-select {
+  
+  #search-button, #search-button2 {
     width: 100%;
   }
 
@@ -208,6 +241,10 @@ h2 {
 
   .metric-card p {
     font-size: 1.2em;
+  }
+  
+  .chart-container {
+    height: 300px;
   }
 }
 
@@ -270,6 +307,82 @@ h2 {
     width: auto;
     min-width: 80px; /* Slightly smaller minimum width for mobile */
     max-width: 120px; /* Slightly smaller maximum width for mobile */
+  }
+}
+
+/* Add new styles for the second chart container */
+.chart-container {
+    background-color: #0d0e2a;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 400px;
+}
+
+.chart-container + .chart-container {
+    margin-top: 30px;
+}
+
+/* Update responsive styles for multiple charts */
+@media (max-width: 767px) {
+    .chart-container {
+        padding: 10px;
+        height: 300px;
+    }
+    
+    .chart-container + .chart-container {
+        margin-top: 20px;
+    }
+}
+
+/* Add these styles to make the lower search container consistent with the upper one */
+.chart-container .search-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px; /* Updated gap */
+  align-items: center; /* Added align-items */
+  margin-bottom: 20px;
+}
+
+.chart-container .search-container > * {
+  flex: 1 1 auto;
+}
+
+.chart-container #userInput,
+.chart-container #dataTypeSelector2,
+.chart-container #search-button2 {
+  min-height: 30px;
+}
+
+.chart-container #userInput,
+.chart-container #dataTypeSelector2 {
+  flex-grow: 1;
+}
+
+.chart-container #search-button2 {
+  flex-grow: 0;
+  min-width: 80px;
+}
+
+/* Ensure consistent height for both chart containers */
+.chart-container {
+  height: 400px;
+}
+
+/* Add media query for mobile devices */
+@media (max-width: 767px) {
+  .chart-container .search-container {
+    flex-direction: column;
+  }
+  
+  .chart-container .search-container > * {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .chart-container {
+    height: auto;
   }
 }
 
