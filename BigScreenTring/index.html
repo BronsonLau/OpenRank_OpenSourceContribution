@@ -45,29 +45,70 @@
                 </div>
                 <div class="card">
                     <h2>贡献者表格</h2>
-                    <table id="contributor-table">
-                        <thead>
-                            <tr>
-                                <th>用户名</th>
-                                <th>贡献数</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>张三</td>
-                                <td>50</td>
-                            </tr>
-                            <tr>
-                                <td>李四</td>
-                                <td>30</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="scrolling-table-container">
+                        <div class="scrolling-table-wrapper">
+                            <table id="contributor-table">
+                                <thead>
+                                    <tr>
+                                        <th>用户名</th>
+                                        <th>贡献数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>张三</td>
+                                        <td>50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>李四</td>
+                                        <td>30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>王五</td>
+                                        <td>45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>赵六</td>
+                                        <td>60</td>
+                                    </tr>
+                                    <tr>
+                                        <td>钱七</td>
+                                        <td>25</td>
+                                    </tr>
+                                    <tr>
+                                        <td>孙八</td>
+                                        <td>80</td>
+                                    </tr>
+                                    <tr>
+                                        <td>周九</td>
+                                        <td>40</td>
+                                    </tr>
+                                    <tr>
+                                        <td>吴十</td>
+                                        <td>35</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- 图表容器 -->
+                <div class="charts-container">
+                    <div class="card">
+                        <h2>贡献者活动柱状图</h2>
+                        <canvas id="contributorActivityChart"></canvas>
+                    </div>
+            
+                    <div class="card">
+                        <h2>仓库Fork数变化柱状图</h2>
+                        <canvas id="forksChangeChart"></canvas>
+                    </div>
                 </div>
             </div>
+            
 
             <div class="right-column">
-                <!-- First Chart Section -->
                 <div class="chart-container">
                     <div class="search-container">
                         <select id="dataTypeSelector" class="data-type-select" onchange="updateChartTitle()">
@@ -106,14 +147,11 @@
                     <canvas id="openRankChart"></canvas>
                 </div>
 
-                <!-- Second Chart Section -->
                 <div class="chart-container">
                     <div class="search-container">
                         <select id="dataTypeSelector2" class="data-type-select" onchange="updateSecondChartTitle()">
                             <option value="openrank">OpenRank</option>
                             <option value="activity">活跃度</option>
-                           
-                            
                         </select>
                         <input type="text" placeholder="Enter GitHub username (e.g. frank-zsy)" id="userInput">
                         <button id="search-button2" onclick="fetchUserData()">搜索</button>
@@ -137,4 +175,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

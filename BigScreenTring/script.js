@@ -1,3 +1,51 @@
+// Contributor Activity Bar Chart
+const ctx1 = document.getElementById('contributorActivityChart').getContext('2d');
+const contributorActivityChart = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+        labels: ['张三', '李四', '王五', '赵六', '钱七', '孙八', '周九', '吴十'],  // 用户名
+        datasets: [{
+            label: '贡献数',
+            data: [50, 30, 45, 60, 25, 80, 40, 35],  // 对应的贡献数
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// Forks Change Bar Chart
+const ctx2 = document.getElementById('forksChangeChart').getContext('2d');
+const forksChangeChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['2023 Q1', '2023 Q2', '2023 Q3', '2023 Q4'],  // 时间区间
+        datasets: [{
+            label: 'Fork数变化',
+            data: [150, 200, 180, 220],  // 对应的Fork数变化数据
+            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+
 let openRankChart;
 let yearData = [];
 let monthData = [];
