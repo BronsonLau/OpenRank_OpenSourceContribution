@@ -502,3 +502,38 @@ tbody {
   flex-wrap: wrap; /* 允许在小屏幕下换行 */
 }
 
+/* 调整图表容器布局，使图表并排显示 */
+.charts-container {
+  display: flex;
+  flex-direction: row; /* 使内容水平排列 */
+  justify-content: space-between; /* 图表之间分布均匀 */
+  gap: 20px; /* 设置图表之间的间隙 */
+  flex-wrap: wrap; /* 允许在小屏幕下换行 */
+}
+
+/* 每个卡片的宽度，设置最大和最小值来确保图表比例 */
+.charts-container .card {
+  width: 48%;  /* 设置每个卡片宽度，确保它们并排显示 */
+  box-sizing: border-box; /* 包括 padding 和 border 在内的宽度不会超出容器 */
+  max-width: 600px; /* 设置最大宽度，避免过度拉伸 */
+  min-width: 300px; /* 设置最小宽度，避免图表过小 */
+}
+
+/* 设置图表的最大和最小高度，确保比例正常 */
+.charts-container canvas {
+  width: 100% !important;  /* 图表宽度随容器宽度变化 */
+  height: auto !important;  /* 保持高度按比例自动调整 */
+}
+
+/* 响应式设计：当屏幕小于 767px 时 */
+@media (max-width: 767px) {
+  .charts-container {
+    flex-direction: column;  /* 小屏幕下让图表垂直排列 */
+    gap: 10px;  /* 缩小图表之间的间隙 */
+  }
+
+  .charts-container .card {
+    width: 100%;  /* 小屏幕下让图表卡片占满宽度 */
+    max-width: 100%; /* 确保不超过屏幕宽度 */
+  }
+}
