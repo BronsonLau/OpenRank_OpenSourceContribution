@@ -1,48 +1,210 @@
-// Contributor Activity Bar Chart
-const ctx1 = document.getElementById('contributorActivityChart').getContext('2d');
-const contributorActivityChart = new Chart(ctx1, {
-    type: 'bar',
-    data: {
-        labels: ['张三', '李四', '王五', '赵六', '钱七', '孙八', '周九', '吴十'],  // 用户名
-        datasets: [{
-            label: '贡献数',
-            data: [50, 30, 45, 60, 25, 80, 40, 35],  // 对应的贡献数
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
+async function fetchTableData() {
+    const response = await fetch('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/repo_id_counts-RJ7aHW29t7KyyMmi92xAFB7MZTbzdn.csv');
+    const data = await response.text();
+    return data.split('\n').slice(1).map(row => {
+        const [repo_id, count, repo_name] = row.split(',');
+        return { repo_name, count };
+    });
+}
+
+async function populateTable() {
+    const tableBody = document.getElementById('tableBody');
+    const data = await fetchTableData();
+
+    data.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.repo_name}</td>
+            <td>${item.count}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+
+    const rowsToAdd = tableBody.innerHTML;
+    tableBody.innerHTML += rowsToAdd;
+
+    startScrolling('tableBody');
+}
+
+function startScrolling(tableId) {
+    const tableBody = document.getElementById(tableId);
+    let scrollPosition = 0;
+    const scrollSpeed = 1;
+
+    function scroll() {
+        scrollPosition += scrollSpeed;
+        tableBody.style.transform = `translateY(-${scrollPosition}px)`;
+
+        if (scrollPosition >= tableBody.clientHeight / 2) {
+            scrollPosition = 0;
         }
+
+        requestAnimationFrame(scroll);
     }
+
+    scroll();
+}
+
+document.addEventListener('DOMContentLoaded', async function() {
+    updateChartTitle();
+    updateSecondChartTitle();
+    setupChartButtons();
+    populateTable();
+    fetchNextMonthForecast();
+    fetchActivityData();
+
+    document.getElementById('search-button').addEventListener('click', fetchData);
+    document.getElementById('search-button2').addEventListener('click', fetchUserData);
 });
 
-// Forks Change Bar Chart
-const ctx2 = document.getElementById('forksChangeChart').getContext('2d');
-const forksChangeChart = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: ['2023 Q1', '2023 Q2', '2023 Q3', '2023 Q4'],  // 时间区间
-        datasets: [{
-            label: 'Fork数变化',
-            data: [150, 200, 180, 220],  // 对应的Fork数变化数据
-            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-            borderColor: 'rgba(153, 102, 255, 1)',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
+
+// 保留原有的代码...
+
+async function fetchCSV(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const csvText = await response.text();
+        return parseCSV(csvText);
+    } catch (error) {
+        console.error("Could not fetch the CSV:", error);
+        return [];
+    }
+}
+
+function parseCSV(csvText) {
+    const lines = csvText.trim().split('\n');
+    const headers = lines[0].split(',');
+    return lines.slice(1).map(line => {
+        const values = line.split(',');
+        return headers.reduce((obj, header, index) => {
+            obj[header.trim()] = values[index];
+            return obj;
+        }, {});
+    });
+}
+
+async function createCharts() {
+    const createdDateCountsUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/created_date_counts-iwpL5wGsn6whtFuNIzUdz07RaE4z9t.csv';
+    const nextMonthForecastUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/next_month_forecast-W6MYI7BodmmeP5V4K7N7MpOz1J7RTu.csv';
+
+    try {
+        const [createdDateCounts, nextMonthForecast] = await Promise.all([
+            fetchCSV(createdDateCountsUrl),
+            fetchCSV(nextMonthForecastUrl)
+        ]);
+
+        if (createdDateCounts.length > 0) {
+            createCreatedDateChart(createdDateCounts);
+        }
+        if (nextMonthForecast.length > 0) {
+            createForecastChart(nextMonthForecast);
+        }
+    } catch (error) {
+        console.error("Error creating charts:", error);
+    }
+}
+
+function createCreatedDateChart(data) {
+    const ctx = document.getElementById('createdDateChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.map(item => new Date(item.created_date).toLocaleDateString()),
+            datasets: [{
+                label: '提交数量',
+                data: data.map(item => parseInt(item.count)),
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '数量'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: '创建日期'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: '按创建日期统计的提交数量'
+                }
             }
         }
-    }
+    });
+}
+
+function createForecastChart(data) {
+    const ctx = document.getElementById('forecastChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.map(item => new Date(item['']).toLocaleDateString()),
+            datasets: [{
+                label: '预测提交数量',
+                data: data.map(item => parseFloat(item.Predicted_Submissions)),
+                backgroundColor: 'rgba(255, 159, 64, 0.6)',
+                borderColor: 'rgba(255, 159, 64, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '预测提交数量'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: '日期'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: '下月预测'
+                }
+            }
+        }
+    });
+}
+
+// 更新 DOMContentLoaded 事件监听器
+document.addEventListener('DOMContentLoaded', function() {
+    updateChartTitle();
+    updateSecondChartTitle();
+    setupChartButtons();
+    populateTable();
+    fetchNextMonthForecast();
+    fetchActivityData();
+    createCharts();  // 添加这一行来创建新的图表
+
+    document.getElementById('search-button').addEventListener('click', fetchData);
+    document.getElementById('search-button2').addEventListener('click', fetchUserData);
 });
+
+// 保留原有的其他函数...
+
 
 
 
@@ -352,10 +514,129 @@ function setupChartButtons() {
 }
 
 // Initial setup
-document.addEventListener('DOMContentLoaded', function() {
-    updateChartTitle();
-    updateSecondChartTitle();
-    // fetchData();
-    // fetchUserData();
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     updateChartTitle();
+//     updateSecondChartTitle();
+//     // fetchData();
+//     // fetchUserData();
+// });
+
+async function fetchNextMonthForecast() {
+    const response = await fetch('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/next_month_forecast-kXuYZqM0oe4ID1FERs7YJeosfZbN19.csv');
+    const data = await response.text();
+    const rows = data.split('\n').slice(1);
+    const latestForecast = rows[rows.length - 1].split(',')[1];
+    document.getElementById('next-month-forecast').textContent = Math.round(parseFloat(latestForecast));
+}
+
+async function fetchActivityData() {
+    const response = await fetch('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/created_date_counts-8gg7cypbexRIJNwqAe8NlkAYAcNFDF.csv');
+    const data = await response.text();
+    const rows = data.split('\n').slice(1);
+    const tableBody = document.getElementById('activityTableBody');
+    
+    rows.forEach(row => {
+        const [date, count] = row.split(',');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${date}</td>
+            <td>${count}</td>
+        `;
+        tableBody.appendChild(tr);
+    });
+
+    startScrolling('activityTableBody');
+}
+
+async function fetchContributorActivityData() {
+    const response = await fetch('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/created_date_counts-8gg7cypbexRIJNwqAe8NlkAYAcNFDF.csv');
+    const data = await response.text();
+    const rows = data.split('\n').slice(1);
+    return rows.map(row => {
+        const [date, count] = row.split(',');
+        return { date, count: parseInt(count) };
+    });
+}
+
+function createContributorActivityChart(data) {
+    const ctx = document.getElementById('contributorActivityChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.map(item => item.date),
+            datasets: [{
+                label: '贡献者活动数',
+                data: data.map(item => item.count),
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '活动数量'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: '日期'
+                    }
+                }
+            }
+        }
+    });
+}
+
+async function fetchForksChangeData() {
+    // For this example, we'll use the same data as the contributor activity
+    // In a real scenario, you'd fetch the actual forks change data
+    const response = await fetch('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/created_date_counts-8gg7cypbexRIJNwqAe8NlkAYAcNFDF.csv');
+    const data = await response.text();
+    const rows = data.split('\n').slice(1);
+    return rows.map(row => {
+        const [date, count] = row.split(',');
+        return { date, count: parseInt(count) };
+    });
+}
+
+function createForksChangeChart(data) {
+    const ctx = document.getElementById('forksChangeChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.map(item => item.date),
+            datasets: [{
+                label: 'Fork数变化',
+                data: data.map(item => item.count),
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Fork数量'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: '日期'
+                    }
+                }
+            }
+        }
+    });
+}
 

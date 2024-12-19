@@ -44,68 +44,35 @@
                     </div>
                 </div>
                 <div class="card">
-                    <h2>贡献者表格</h2>
-                    <div class="scrolling-table-container">
-                        <div class="scrolling-table-wrapper">
-                            <table id="contributor-table">
-                                <thead>
-                                    <tr>
-                                        <th>用户名</th>
-                                        <th>贡献数</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>张三</td>
-                                        <td>50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>李四</td>
-                                        <td>30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>王五</td>
-                                        <td>45</td>
-                                    </tr>
-                                    <tr>
-                                        <td>赵六</td>
-                                        <td>60</td>
-                                    </tr>
-                                    <tr>
-                                        <td>钱七</td>
-                                        <td>25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>孙八</td>
-                                        <td>80</td>
-                                    </tr>
-                                    <tr>
-                                        <td>周九</td>
-                                        <td>40</td>
-                                    </tr>
-                                    <tr>
-                                        <td>吴十</td>
-                                        <td>35</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h2>仓库活动数量排行</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>repo_name</th>
+                                    <th>count</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             
-                <!-- 图表容器 -->
-                <div class="charts-container">
+                 <!-- 新的图表容器 -->
+                 <div class="charts-container">
                     <div class="card">
-                        <h2>贡献者活动柱状图</h2>
-                        <canvas id="contributorActivityChart"></canvas>
+                        <h2>提交数量统计</h2>
+                        <canvas id="createdDateChart"></canvas>
                     </div>
             
                     <div class="card">
-                        <h2>仓库Fork数变化柱状图</h2>
-                        <canvas id="forksChangeChart"></canvas>
+                        <h2>下月预测</h2>
+                        <canvas id="forecastChart"></canvas>
                     </div>
                 </div>
             </div>
+            
             
 
             <div class="right-column">
@@ -173,5 +140,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="charts.js"></script>
 </body>
 </html>

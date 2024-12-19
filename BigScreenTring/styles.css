@@ -146,6 +146,7 @@ main {
   border-radius: 5px;
   padding: 20px;
   margin-bottom: 20px;
+
 }
 
 h2 {
@@ -457,3 +458,47 @@ h2 {
     width: 100%;  /* 保证左侧其他卡片宽度不变 */
   }
 }
+
+.table-container {
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #1a1b3a;
+}
+
+th {
+  background-color: #1a1b3a;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+tbody {
+  position: relative;
+}
+
+/* 用flexbox布局容器，使图表垂直排列 */
+.charts-container {
+  display: flex;
+  flex-direction: column; /* 使内容垂直排列 */
+  gap: 20px; /* 图表之间的间距 */
+}
+
+/* 调整图表容器布局，使图表并排显示 */
+.charts-container {
+  display: flex;
+  flex-direction: row; /* 使内容水平排列 */
+  justify-content: space-between; /* 图表之间分布均匀 */
+  gap: 20px; /* 设置图表之间的间隙 */
+  flex-wrap: wrap; /* 允许在小屏幕下换行 */
+}
+
