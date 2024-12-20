@@ -441,7 +441,7 @@ h2 {
 }
 
 .charts-container .card {
-  width: 48%;  /* 设置每个柱状图卡片宽度，确保它们并排且不超过边界 */
+  width: 100%;  /* 设置每个柱状图卡片宽度，确保它们并排且不超过边界 */
   
   box-sizing: border-box;  /* 包括 padding 和 border 在内的宽度不会超出容器 */
 }
@@ -450,20 +450,6 @@ h2 {
   width: 100%;  /* 使左侧其他卡片（如仓库统计和贡献者表格）保持原宽度 */
 }
 
-@media (max-width: 767px) {
-  .charts-container {
-    flex-direction: column;  /* 小屏幕下让柱状图卡片纵向排列 */
-    gap: 10px;  /* 缩小柱状图卡片间的间隙 */
-  }
-
-  .charts-container .card {
-    width: 100%;  /* 小屏幕下让柱状图卡片占满宽度 */
-  }
-
-  .left-column .card {
-    width: 100%;  /* 保证左侧其他卡片宽度不变 */
-  }
-}
 
 .table-container {
   height: 300px;
@@ -492,54 +478,29 @@ tbody {
   position: relative;
 }
 
-/* 用flexbox布局容器，使图表垂直排列 */
+
+/* 图表容器 */
 .charts-container {
-  display: flex;
-  flex-direction: column; /* 使内容垂直排列 */
-  gap: 20px; /* 图表之间的间距 */
+  width: 106%;
+  overflow: hidden; /* 隐藏超出容器的部分 */
 }
 
-/* 调整图表容器布局，使图表并排显示 */
-.charts-container {
-  display: flex;
-  flex-direction: row; /* 使内容水平排列 */
-  justify-content: space-between; /* 图表之间分布均匀 */
-  gap: 20px; /* 设置图表之间的间隙 */
-  /* flex-wrap: wrap; 允许在小屏幕下换行 */
+.carousel {
+  display: flex; /* 使用 Flexbox 布局 */
+  transition: transform 0.5s ease-in-out; /* 平滑过渡效果 */
+  width: 100%; /* 确保容器宽度适应 */
 }
 
-/* 调整图表容器布局，使图表并排显示 */
-.charts-container {
-  display: flex;
-  flex-direction: row; /* 使内容水平排列 */
-  justify-content: space-between; /* 图表之间分布均匀 */
-  gap: 20px; /* 设置图表之间的间隙 */
-  /* flex-wrap: wrap; 允许在小屏幕下换行 */
+.carousel .card {
+  width: 100%;  /* 每个卡片占满整个轮播容器 */
+  box-sizing: border-box;
+  padding: 20px;
+  flex-shrink: 0; /* 防止卡片缩小 */
 }
 
-/* 每个卡片的宽度，设置最大和最小值来确保图表比例 */
-.charts-container .card {
-  width: 48%;  /* 设置每个卡片宽度，确保它们并排显示 */
-  box-sizing: border-box; /* 包括 padding 和 border 在内的宽度不会超出容器 */
-  max-width: 600px; /* 设置最大宽度，避免过度拉伸 */
-  min-width: 300px; /* 设置最小宽度，避免图表过小 */
-}
-
-/* 设置图表的最大和最小高度，确保比例正常 */
+/* 设置图表的宽度和高度 */
 .charts-container canvas {
-  width: 100% !important;  /* 图表宽度随容器宽度变化 */
-  height: 400px !important;  /* 保持高度按比例自动调整 */
+  width: 100% !important;
+  height: auto !important;
 }
 
-/* 响应式设计：当屏幕小于 767px 时 */
-@media (max-width: 767px) {
-  .charts-container {
-    flex-direction: column;  /* 小屏幕下让图表垂直排列 */
-    gap: 10px;  /* 缩小图表之间的间隙 */
-  }
-
-  .charts-container .card {
-    width: 100%;  /* 小屏幕下让图表卡片占满宽度 */
-    max-width: 100%; /* 确保不超过屏幕宽度 */
-  }
-}

@@ -205,6 +205,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 保留原有的其他函数...
 
+const carousel = document.querySelector('.carousel');
+const totalSlides = document.querySelectorAll('.carousel .card').length;
+let currentSlide = 0;
+
+// 自动切换轮播图
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % totalSlides; // 循环播放
+  carousel.style.transform = `translateX(-${currentSlide * 100}%)`; // 移动轮播图的位置
+}
+
+// 设置每 3 秒切换一次
+setInterval(nextSlide, 3000);
 
 
 
