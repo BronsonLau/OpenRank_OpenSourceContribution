@@ -1,0 +1,544 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #0a0b1b; /* 深色背景 */
+  color: #ffffff; /* 白色字体 */
+}
+
+.dashboard {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.author-info {
+  font-size: 0.8em;
+  margin-right: 20px;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin: 0;
+}
+
+.repo-name {
+  color: #4cc9f0; /* 蓝色 */
+  margin-right: 20px;
+}
+
+.search-container {
+  width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    align-items: center; /* 确保垂直居中对齐 */
+    flex-wrap: nowrap; /* 防止元素换行 */
+  
+}
+
+.search-container > * {
+  flex: 1 1 auto;
+}
+
+#repoInput, #userInput, .data-type-select {
+  padding: 5px;
+  border: 1px solid #333;
+  background-color: transparent;
+  color: #fff;
+  min-width: 120px;
+  flex-grow: 1;
+  border-radius: 5px;
+}
+
+#search-button, #search-button2 {
+  padding: 5px 10px;
+  background-color: #4cc9f0; /* 蓝色 */
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  min-width: 80px;
+  flex-grow: 0;
+}
+
+#search-button:hover, #search-button2:hover {
+  background-color: #3e9cb8;
+}
+
+.data-type-select {
+    padding: 5px;
+    border: 1px solid #333;
+    background-color: #1a1b3a;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+.data-type-select:hover {
+    border-color: #4cc9f0;
+}
+
+.data-type-select option {
+    background-color: #0d0e2a;
+    color: #fff;
+}
+
+.data-type-select,
+#dataTypeSelector,
+#dataTypeSelector2 {
+    width: 150px;  /* Set fixed width for both dropdowns */
+    min-width: 150px;
+    max-width: 150px;
+    height: 36px;  /* Set fixed height for both dropdowns */
+    padding: 5px 10px;
+    flex: none;    /* Prevent flex growth/shrink */
+}
+
+/* Ensure input fields take remaining space */
+#repoInput,
+#userInput {
+    flex: 1;
+    height: 36px;  /* Match height with dropdowns */
+    padding: 5px 10px;
+}
+
+/* Adjust search buttons to match height */
+#search-button,
+#search-button2 {
+    height: 36px;
+    padding: 0 20px;
+    white-space: nowrap;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  flex-wrap: wrap;  /* 让内容在小屏幕下换行 */
+}
+
+.left-column {
+  width: 48%;
+}
+
+.right-column {
+  width: 48%;
+}
+
+.card {
+  background-color: #0d0e2a; /* 卡片背景 */
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+
+}
+
+h2 {
+  font-size: 1em;
+  margin-top: 0;
+  color: #9ca3af; /* 浅灰色 */
+}
+
+.metrics-overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.metric-card {
+  background-color: #0d0e2a; /* 卡片背景 */
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+}
+
+.metric-card h3 {
+  font-size: 0.8em;
+  margin: 0;
+  color: #9ca3af; /* 浅灰色 */
+}
+
+.metric-card p {
+  font-size: 1.5em;
+  margin: 5px 0 0;
+  color: #4cc9f0; /* 蓝色 */
+}
+
+#contributor-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#contributor-table th, #contributor-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#contributor-table th {
+  color: #9ca3af; /* 浅灰色 */
+}
+
+/* 响应式设计 */
+@media (max-width: 767px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .repo-name {
+    margin-right: 0;
+    margin-top: 10px;
+  }
+
+  .search-container {
+    margin-top: 10px;
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .search-container > * {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  #search-button, #search-button2 {
+    width: 100%;
+  }
+
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-column, .right-column {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .metrics-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-card p {
+    font-size: 1.2em;
+  }
+  
+  .chart-container {
+    height: 300px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-column, .right-column {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .metrics-overview {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.chart-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.chart-button {
+    padding: 8px 15px;
+    margin: 0 3px;
+    background-color: #1a1b3a;
+    border: 1px solid #4cc9f0;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 14px;
+    border-radius: 5px;
+    width: auto; /* Allow the button to size based on content */
+    min-width: 100px; /* Set a minimum width */
+    max-width: 150px; /* Set a maximum width */
+}
+
+.chart-button:hover {
+    background-color: #4cc9f0;
+    color: #0a0b1b;
+}
+
+.chart-button.active {
+    background-color: #4cc9f0;
+    color: #0a0b1b;
+}
+
+@media (max-width: 767px) {
+  .chart-selector {
+    flex-direction: row; /* Change to row for better space utilization */
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping for very small screens */
+  }
+
+  .chart-button {
+    margin: 5px;
+    width: auto;
+    min-width: 80px; /* Slightly smaller minimum width for mobile */
+    max-width: 120px; /* Slightly smaller maximum width for mobile */
+  }
+}
+
+/* Add new styles for the second chart container */
+.chart-container {
+    background-color: #0d0e2a;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 400px;
+}
+
+.chart-container + .chart-container {
+    margin-top: 30px;
+}
+
+/* Update responsive styles for multiple charts */
+@media (max-width: 767px) {
+    .chart-container {
+        padding: 10px;
+        height: 300px;
+    }
+    
+    .chart-container + .chart-container {
+        margin-top: 20px;
+    }
+}
+
+/* Add these styles to make the lower search container consistent with the upper one */
+.chart-container .search-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px; /* Updated gap */
+  align-items: center; /* Added align-items */
+  margin-bottom: 20px;
+}
+
+.chart-container .search-container > * {
+  flex: 1 1 auto;
+}
+
+.chart-container #userInput,
+.chart-container #dataTypeSelector2,
+.chart-container #search-button2 {
+  min-height: 30px;
+}
+
+.chart-container #userInput,
+.chart-container #dataTypeSelector2 {
+  flex-grow: 1;
+}
+
+.chart-container #search-button2 {
+  flex-grow: 0;
+  min-width: 80px;
+}
+
+/* Ensure consistent height for both chart containers */
+.chart-container {
+  height: 400px;
+}
+
+/* Add media query for mobile devices */
+@media (max-width: 767px) {
+  .chart-container .search-container {
+    flex-direction: column;
+  }
+  
+  .chart-container .search-container > * {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .chart-container {
+    height: auto;
+  }
+}
+
+/* 增加自动滚动的CSS样式 */
+.scrolling-table-container {
+  width: 100%;
+  height: 300px; /* 设置表格容器高度 */
+  overflow: hidden; /* 隐藏所有滚动条 */
+  position: relative;
+}
+
+.scrolling-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  animation: scrollTable 10s linear infinite;
+  width: 100%;
+}
+
+.scrolling-table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* 确保表格列宽均匀分配 */
+}
+
+.scrolling-table-wrapper th, .scrolling-table-wrapper td {
+  padding: 12px;
+  text-align: center; /* 确保数据居中显示 */
+  word-wrap: break-word; /* 确保内容过长时换行 */
+  width: 50%; /* 两列各占一半 */
+  border: none; /* 去掉边框 */
+}
+
+/* 修复滚动动画，确保无缝循环 */
+@keyframes scrollTable {
+  0% {
+      top: 0;
+  }
+  100% {
+      top: -100%; /* 通过调整top来实现循环滚动 */
+  }
+}
+
+/* 确保柱状图容器不超过左侧区域的边界 */
+.charts-container {
+  display: flex;
+  justify-content: space-between;  /* 使柱状图卡片左右分布 */
+  gap: 20px;  /* 设置卡片之间的间隙 */
+  flex-wrap: nowrap;  /* 确保不换行，两个柱状图始终并排 */
+}
+
+.charts-container .card {
+  width: 48%;  /* 设置每个柱状图卡片宽度，确保它们并排且不超过边界 */
+  box-sizing: border-box;  /* 包括 padding 和 border 在内的宽度不会超出容器 */
+}
+
+.left-column .card {
+  width: 100%;  /* 使左侧其他卡片（如仓库统计和贡献者表格）保持原宽度 */
+}
+
+@media (max-width: 767px) {
+  .charts-container {
+    flex-direction: column;  /* 小屏幕下让柱状图卡片纵向排列 */
+    gap: 10px;  /* 缩小柱状图卡片间的间隙 */
+  }
+
+  .charts-container .card {
+    width: 100%;  /* 小屏幕下让柱状图卡片占满宽度 */
+  }
+
+  .left-column .card {
+    width: 100%;  /* 保证左侧其他卡片宽度不变 */
+  }
+}
+
+.table-container {
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #1a1b3a;
+}
+
+th {
+  background-color: #1a1b3a;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+tbody {
+  position: relative;
+}
+
+/* 用flexbox布局容器，使图表垂直排列 */
+.charts-container {
+  display: flex;
+  flex-direction: column; /* 使内容垂直排列 */
+  gap: 20px; /* 图表之间的间距 */
+}
+
+/* 调整图表容器布局，使图表并排显示 */
+.charts-container {
+  display: flex;
+  flex-direction: row; /* 使内容水平排列 */
+  justify-content: space-between; /* 图表之间分布均匀 */
+  gap: 20px; /* 设置图表之间的间隙 */
+  flex-wrap: wrap; /* 允许在小屏幕下换行 */
+}
+
+/* 调整图表容器布局，使图表并排显示 */
+.charts-container {
+  display: flex;
+  flex-direction: row; /* 使内容水平排列 */
+  justify-content: space-between; /* 图表之间分布均匀 */
+  gap: 20px; /* 设置图表之间的间隙 */
+  flex-wrap: wrap; /* 允许在小屏幕下换行 */
+}
+
+/* 每个卡片的宽度，设置最大和最小值来确保图表比例 */
+.charts-container .card {
+  width: 48%;  /* 设置每个卡片宽度，确保它们并排显示 */
+  box-sizing: border-box; /* 包括 padding 和 border 在内的宽度不会超出容器 */
+  max-width: 600px; /* 设置最大宽度，避免过度拉伸 */
+  min-width: 300px; /* 设置最小宽度，避免图表过小 */
+}
+
+/* 设置图表的最大和最小高度，确保比例正常 */
+.charts-container canvas {
+  width: 100% !important;  /* 图表宽度随容器宽度变化 */
+  height: auto !important;  /* 保持高度按比例自动调整 */
+}
+
+/* 响应式设计：当屏幕小于 767px 时 */
+@media (max-width: 767px) {
+  .charts-container {
+    flex-direction: column;  /* 小屏幕下让图表垂直排列 */
+    gap: 10px;  /* 缩小图表之间的间隙 */
+  }
+
+  .charts-container .card {
+    width: 100%;  /* 小屏幕下让图表卡片占满宽度 */
+    max-width: 100%; /* 确保不超过屏幕宽度 */
+  }
+}
