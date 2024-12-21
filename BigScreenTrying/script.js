@@ -1,3 +1,45 @@
+const languageCtx1 = document.getElementById('language-chart-1').getContext('2d');
+    new Chart(languageCtx1, {
+        type: 'doughnut',
+        data: {
+            labels: ['H', 'JavaScript', 'CSS'],
+            datasets: [{
+                data: [89.37, 9.51, 1.07],
+                backgroundColor: ['#007ACC', '#F1E05A', '#563D7C'],
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                }
+            },
+            cutout: '70%'
+        }
+    });
+
+    // 第二个饼图
+    const languageCtx2 = document.getElementById('language-chart-2').getContext('2d');
+    new Chart(languageCtx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Python', 'Java', 'Ruby'],
+            datasets: [{
+                data: [60, 30, 10],
+                backgroundColor: ['#306998', '#B07219', '#701516'],
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                }
+            },
+            cutout: '70%'
+        }
+    });
 async function fetchTableData() {
     const response = await fetch('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/repo_id_counts-RJ7aHW29t7KyyMmi92xAFB7MZTbzdn.csv');
     const data = await response.text();
