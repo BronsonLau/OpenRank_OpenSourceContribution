@@ -11,4 +11,4 @@ def split_file(file_path, chunk_size=60*1024*1024):
             chunk_num += 1
 
 # 示例用法
-split_file('Washed3.csv')  # 替换为你的大文件路径
+split_file('Washed4.csv')  
