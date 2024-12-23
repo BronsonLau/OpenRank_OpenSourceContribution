@@ -260,8 +260,6 @@ function nextSlide() {
 // 设置每 3 秒切换一次
 setInterval(nextSlide, 3000);
 
-
-
 let openRankChart;
 let yearData = [];
 let monthData = [];
@@ -290,15 +288,15 @@ function getDataTypeLabel(dataType) {
         'issue_response_time': 'Issue response time',
         'issue_resolution_duration': 'Issue resolution duration',
         'issue_age': 'Issue age',
-        'code_change_lines_add': 'Code change lines',
+        'code_change_lines_add': 'Code change_lines',
         'code_change_lines_remove': 'code_change_lines_remove',
         'code_change_lines_sum': '代码变更总行数',
         'change_requests': 'Change requests',
         'change_requests_accepted': 'Change requests accepted',
         'change_requests_reviews': 'Change requests',
         'change_request_response_time': 'Change request response time',
-        'change_request_resolution_duration': 'Change request resolution duration',
-        'change_request_age': 'Change request age	',
+        'change_request_resolution_duration': 'Change request resolution_duration',
+        'change_request_age': 'Change request age',
         'activity_details': 'Activity Details',
         'developer_network': 'Developer network',
         'repo_network': 'Repo network'
@@ -321,41 +319,36 @@ function updateSecondChartTitle() {
 // 获取 URL 参数
 function getUrlParam(param, defaultValue) {
     const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.has(param) ? urlParams.get(param) : defaultValue;
+    return urlParams.has(param)? urlParams.get(param) : defaultValue;
 }
 
 // 转换年份、月份、季度数据为时间序列
 function parseYearData(data) {
     return Object.entries(data)
-        .filter(([key]) => key.length === 4) // 过滤年份数据
-        .map(([year, value]) => ({ x: new Date(`${year}-01-01`), y: value }));
+     .filter(([key]) => key.length === 4) // 过滤年份数据
+     .map(([year, value]) => ({ x: new Date(`${year}-01-01`), y: value }));
 }
 
 function parseMonthData(data) {
     return Object.entries(data)
-        .filter(([key]) => key.length === 7 && key.includes('-')) // 过滤年月数据
-        .map(([month, value]) => ({ x: new Date(`${month}-01`), y: value }));
+     .filter(([key]) => key.length === 7 && key.includes('-')) // 过滤年月数据
+     .map(([month, value]) => ({ x: new Date(`${month}-01`), y: value }));
 }
 
 function parseQuarterData(data) {
     return Object.entries(data)
-        .filter(([key]) => key.length === 6 && key.includes('Q')) // 过滤季度数据
-        .map(([quarter, value]) => {
+     .filter(([key]) => key.length === 6 && key.includes('Q')) // 过滤季度数据
+     .map(([quarter, value]) => {
             const year = quarter.slice(0, 4);
             const quarterNum = quarter.slice(5);
             const month = (quarterNum - 1) * 3 + 1; // 获取季度的第一月
-            return { x: new Date(`${year}-${month < 10 ? '0' : ''}${month}-01`), y: value };
+            return { x: new Date(`${year}-${month < 10? '0' : ''}${month}-01`), y: value };
         });
 }
 
 async function fetchData() {
     const repo = document.getElementById('repoInput').value.trim();
     const dataType = document.getElementById('dataTypeSelector').value;
-
-    // if (!repo) {
-    //     alert('请输入仓库名。');
-    //     return;
-    // }
 
     try {
         const response = await fetch(`https://oss.x-lab.info/open_digger/github/${repo}/${dataType}.json`);
@@ -375,11 +368,9 @@ async function fetchData() {
         // 更新图表标题
         updateChartTitle();
 
-        // 初始加载图表
-        setupChartButtons();
-        updateChart('year'); // Default to year chart
+        // 初始加载图表（使用默认的 'year' 图表类型加载）
+        updateChart('year');
     } catch (error) {
-        alert('获取数据时出错，请检查仓库名称或数据类型！');
         console.error('Error:', error);
     }
 }
@@ -387,11 +378,6 @@ async function fetchData() {
 async function fetchUserData() {
     const username = document.getElementById('userInput').value.trim();
     const dataType = document.getElementById('dataTypeSelector2').value;
-
-    // if (!username) {
-    //     alert('请输入用户名。');
-    //     return;
-    // }
 
     try {
         const response = await fetch(`https://oss.x-lab.info/open_digger/github/${username}/${dataType}.json`);
@@ -408,10 +394,9 @@ async function fetchUserData() {
         // Update chart title
         updateSecondChartTitle();
 
-        // Initialize with year data
+        // 初始加载图表（使用默认的 'year' 图表类型加载）
         updateSecondChart('year');
     } catch (error) {
-        alert('获取数据时出错，请检查用户名或数据类型！');
         console.error('Error:', error);
     }
 }
@@ -455,7 +440,7 @@ function updateChart(chartType = 'year') {
                     mode: 'nearest',
                     intersect: false,
                     callbacks: {
-                        label: function(tooltipItem) {
+                        label: function (tooltipItem) {
                             const value = tooltipItem.raw.y;
                             return `${tooltipItem.label}: ${value.toFixed(2)}`;
                         }
@@ -466,18 +451,17 @@ function updateChart(chartType = 'year') {
                 x: {
                     type: 'time',
                     time: {
-                        unit: chartType === 'year' ? 'year' : chartType === 'month' ? 'month' : 'quarter',
+                        unit: chartType === 'year'? 'year' : chartType === 'month'? 'month' : 'quarter',
                         tooltipFormat: 'll',
                     },
                     title: {
                         display: true,
-                        text: chartType === 'year' ? 'Year' : chartType === 'month' ? 'Month' : 'Quarter'
+                        text: chartType === 'year'? 'Year' : chartType === 'month'? 'Month' : 'Quarter'
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: chartLabel
                     },
                     beginAtZero: true
                 }
@@ -496,7 +480,7 @@ function updateSecondChart(chartType = 'year') {
     const dataType = document.getElementById('dataTypeSelector2').value;
     const chartLabel = getDataTypeLabel(dataType);
 
-    // Select data based on chart type
+    // 根据选择的图表类型更新数据
     if (chartType === 'year') {
         chartData = userYearData;
     } else if (chartType === 'month') {
@@ -505,7 +489,7 @@ function updateSecondChart(chartType = 'year') {
         chartData = userQuarterData;
     }
 
-    // Create new chart
+    // 创建新图表
     const ctx = document.getElementById('userChart').getContext('2d');
     userChart = new Chart(ctx, {
         type: 'line',
@@ -525,7 +509,7 @@ function updateSecondChart(chartType = 'year') {
                     mode: 'nearest',
                     intersect: false,
                     callbacks: {
-                        label: function(tooltipItem) {
+                        label: function (tooltipItem) {
                             const value = tooltipItem.raw.y;
                             return `${tooltipItem.label}: ${value.toFixed(2)}`;
                         }
@@ -536,12 +520,12 @@ function updateSecondChart(chartType = 'year') {
                 x: {
                     type: 'time',
                     time: {
-                        unit: chartType === 'year' ? 'year' : chartType === 'month' ? 'month' : 'quarter',
+                        unit: chartType === 'year'? 'year' : chartType === 'month'? 'month' : 'quarter',
                         tooltipFormat: 'll',
                     },
                     title: {
                         display: true,
-                        text: chartType === 'year' ? 'Year' : chartType === 'month' ? 'Month' : 'Quarter'
+                        text: chartType === 'year'? 'Year' : chartType === 'month'? 'Month' : 'Quarter'
                     }
                 },
                 y: {
@@ -557,15 +541,31 @@ function updateSecondChart(chartType = 'year') {
 }
 
 function setupChartButtons() {
-    const buttons = document.querySelectorAll('.chart-button');
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            buttons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            updateChart(this.dataset.chart);
+    const chartSelectors = document.querySelectorAll('.chart-selector');
+    chartSelectors.forEach(function (chartSelector) {
+        const buttons = chartSelector.querySelectorAll('.chart-button');
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                buttons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                const chartGroup = chartSelector.dataset.chartGroup;
+                if (chartGroup === 'first') {
+                    updateChart(this.dataset.chart);
+                } else if (chartGroup === 'second') {
+                    updateSecondChart(this.dataset.chart);
+                }
+            });
         });
     });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    updateChartTitle();
+    updateSecondChartTitle();
+    setupChartButtons();
+    fetchData();
+    fetchUserData();
+});
 
 // Initial setup
 // document.addEventListener('DOMContentLoaded', function() {

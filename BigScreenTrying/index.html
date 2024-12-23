@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 </head>
+
 <body>
     <div class="dashboard">
         <header>
@@ -16,11 +18,11 @@
                 <h1>仓库以及个人操作数据展示可视化大屏</h1>
             </div>
             <div class="header-right">
-                
-                 <h2 style="color: aliceblue;">不知道叫什么才队</h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <h2 style="color: aliceblue;">大屏制作：王可楠  数据处理与分析：柯宇</h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <div class="repo-name" id="repo-name">ant-design/ant-design</div>
-                 <!-- X-lab2017/Open-Digger -->
+
+                <h2 style="color: aliceblue;">不知道叫什么才队</h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <h2 style="color: aliceblue;">大屏制作：王可楠  数据处理与分析：柯宇</h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="repo-name" id="repo-name">ant-design/ant-design</div>
+                <!-- X-lab2017/Open-Digger -->
             </div>
         </header>
 
@@ -54,10 +56,10 @@
                         </table>
                     </div>
                 </div>
-            
-                 <!-- 新的图表容器 -->
-                  
-                 <!-- 图表轮播容器 -->
+
+                <!-- 新的图表容器 -->
+
+                <!-- 图表轮播容器 -->
                 <div class="charts-container">
                     <div class="carousel">
                         <div class="card">
@@ -101,7 +103,7 @@
                     <h2 id="chartTitle" style="text-align: center;">GitHub OpenRank Chart</h2>
                     <div id="error"></div>
 
-                    <div class="chart-selector">
+                    <div class="chart-selector" data-chart-group="first">
                         <button class="chart-button active" data-chart="year">年度图表</button>
                         <button class="chart-button" data-chart="month">月度图表</button>
                         <button class="chart-button" data-chart="quarter">季度图表</button>
@@ -123,7 +125,7 @@
                     <h2 id="chartTitle2" style="text-align: center;">GitHub User OpenRank Chart</h2>
                     <div id="error2"></div>
 
-                    <div class="chart-selector">
+                    <div class="chart-selector" data-chart-group="second">
                         <button class="chart-button active" data-chart="year" onclick="updateSecondChart('year')">年度图表</button>
                         <button class="chart-button" data-chart="month" onclick="updateSecondChart('month')">月度图表</button>
                         <button class="chart-button" data-chart="quarter" onclick="updateSecondChart('quarter')">季度图表</button>
@@ -138,4 +140,5 @@
     <script src="script.js"></script>
     <script src="charts.js"></script>
 </body>
+
 </html>
