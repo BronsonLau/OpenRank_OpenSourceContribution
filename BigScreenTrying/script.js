@@ -2,10 +2,10 @@ const languageCtx1 = document.getElementById('language-chart-1').getContext('2d'
     new Chart(languageCtx1, {
         type: 'doughnut',
         data: {
-            labels: ['H', 'JavaScript', 'CSS'],
+            labels: ['JavaScript', 'Python', 'TypeScript', 'Java', 'HTML', 'C#', 'Ruby', 'C++', 'Go', 'PHP'],
             datasets: [{
-                data: [89.37, 9.51, 1.07],
-                backgroundColor: ['#007ACC', '#F1E05A', '#563D7C'],
+                data: [25162, 14312, 10926, 10554, 9766, 9548, 7291, 4952, 4833, 3185],
+                backgroundColor: ['#007ACC', '#F1E05A', '#563D7C', '#B07219', '#E34C26', '#178600', '#701516', '#00589B', '#00ADD8', '#4F5D95'],
             }]
         },
         options: {
@@ -24,10 +24,10 @@ const languageCtx1 = document.getElementById('language-chart-1').getContext('2d'
     new Chart(languageCtx2, {
         type: 'doughnut',
         data: {
-            labels: ['Python', 'Java', 'Ruby'],
+            labels: ['0-1', '2-10', '11-20','21-50','51-100','100-∞'],
             datasets: [{
-                data: [60, 30, 10],
-                backgroundColor: ['#306998', '#B07219', '#701516'],
+                data: [0, 31510, 512,276,49,12],
+                backgroundColor: ['#007ACC', '#F1E05A', '#563D7C', '#B07219', '#E34C26', '#178600'],
             }]
         },
         options: {
