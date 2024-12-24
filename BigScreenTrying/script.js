@@ -12,7 +12,7 @@ const languageCtx1 = document.getElementById('language-chart-1').getContext('2d'
             responsive: true,
             plugins: {
                 legend: {
-                    position: 'bottom',
+                    position: 'left',
                 }
             },
             cutout: '70%'
@@ -24,7 +24,7 @@ const languageCtx1 = document.getElementById('language-chart-1').getContext('2d'
     new Chart(languageCtx2, {
         type: 'doughnut',
         data: {
-            labels: ['0-1', '2-5','6-10', '11-20','21-50','51-100','100-∞'],
+            labels: ['0-1', '2-5','6-10', '11-20','21-50','51-100','>=100'],
             datasets: [{
                 data: [0, 987,1513, 512,276,49,12],
                 backgroundColor: ['#007ACC', '#F1E05A', '#563D7C', '#B07219', '#E34C26', '#178600'],
@@ -34,7 +34,7 @@ const languageCtx1 = document.getElementById('language-chart-1').getContext('2d'
             responsive: true,
             plugins: {
                 legend: {
-                    position: 'bottom',
+                    position: 'right',
                 }
             },
             cutout: '70%'
