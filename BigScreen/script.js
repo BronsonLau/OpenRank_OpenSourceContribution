@@ -129,8 +129,8 @@ function parseCSV(csvText) {
 }
 
 async function createCharts() {
-    const createdDateCountsUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/created_date_counts-iwpL5wGsn6whtFuNIzUdz07RaE4z9t.csv';
-    const nextMonthForecastUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/next_month_forecast-W6MYI7BodmmeP5V4K7N7MpOz1J7RTu.csv';
+    const createdDateCountsUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/created_date_counts-GzrzBXJqGTT8HViWyXUZe6d5tGrIjX.csv';
+    const nextMonthForecastUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/predicted_february_count-cNaGvz45u6j0qPjsHkj8ELBXHQOfim.csv';
 
     try {
         const [createdDateCounts, nextMonthForecast] = await Promise.all([
@@ -195,10 +195,10 @@ function createForecastChart(data) {
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: data.map(item => new Date(item['']).toLocaleDateString()),
+            labels: data.map(item => new Date(item.created_date).toLocaleDateString()),
             datasets: [{
                 label: '预测提交数量',
-                data: data.map(item => parseFloat(item.Predicted_Submissions)),
+                data: data.map(item => parseFloat(item.predicted_count)),
                 backgroundColor: 'rgba(255, 159, 64, 0.6)',
                 borderColor: 'rgba(255, 159, 64, 1)',
                 borderWidth: 1
