@@ -41,7 +41,7 @@ const languageCtx1 = document.getElementById('language-chart-1').getContext('2d'
         }
     });
 async function fetchTableData() {
-    const response = await fetch('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/repo_id_counts-RJ7aHW29t7KyyMmi92xAFB7MZTbzdn.csv');
+    const response = await fetch('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/repo_id_counts-u1VMkSa6zdRnHSDbkDi9g7hWDKLvV0.csv');
     const data = await response.text();
     return data.split('\n').slice(1).map(row => {
         const [repo_id, count, repo_name] = row.split(',');
