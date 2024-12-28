@@ -130,7 +130,7 @@ function parseCSV(csvText) {
 
 async function createCharts() {
     const createdDateCountsUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/created_date_counts-GzrzBXJqGTT8HViWyXUZe6d5tGrIjX.csv';
-    const nextMonthForecastUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/predicted_february_count-cNaGvz45u6j0qPjsHkj8ELBXHQOfim.csv';
+    const nextMonthForecastUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/predicted_february_count_lstm-VvD0YOqyfqR5kdHvlc2XbEFAQUscl4.csv';
 
     try {
         const [createdDateCounts, nextMonthForecast] = await Promise.all([
@@ -189,7 +189,6 @@ function createCreatedDateChart(data) {
         }
     });
 }
-
 function createForecastChart(data) {
     const ctx = document.getElementById('forecastChart').getContext('2d');
     new Chart(ctx, {
@@ -209,6 +208,9 @@ function createForecastChart(data) {
             scales: {
                 y: {
                     beginAtZero: true,
+                    min: 28000,  // 设置y轴的最小值
+                    max: Math.max(...data.map(item => parseFloat(item.predicted_count))) , // 设置y轴的最大值
+                    stepSize: 5,  // 控制y轴刻度间隔
                     title: {
                         display: true,
                         text: '预测提交数量'
@@ -230,6 +232,7 @@ function createForecastChart(data) {
         }
     });
 }
+
 
 // 更新 DOMContentLoaded 事件监听器
 document.addEventListener('DOMContentLoaded', function() {
