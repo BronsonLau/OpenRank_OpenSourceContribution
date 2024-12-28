@@ -176,7 +176,7 @@ function createCreatedDateChart(data) {
                 x: {
                     title: {
                         display: true,
-                        text: '创建日期'
+                        text: '日期'
                     }
                 }
             },
