@@ -38,7 +38,7 @@ OpenRank开源数字生态分析与应用创新赛
 ## 可视化展示与搜索部分
 ### 大屏.jpg
 ### 使用聚合平台技术展示屏幕.jpg （作为对照组）
-### /BigScreenTrying
+### /BigScreen
 ### /Videos/大屏介绍.mp4 <br> <br> 
 
 ## 数据处理部分
