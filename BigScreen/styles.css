@@ -1,9 +1,242 @@
+/* 动态跳动的圆形元素的样式 */
+@keyframes bounce {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-30px); /* 向上跳动 */
+  }
+}
+
+/* 为多个圆形元素设置跳动效果 */
+.circle {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: bounce 1.5s infinite ease-in-out;
+  animation-delay: calc(0.1s * var(--i)); /* 每个元素的动画延时，确保它们不同步 */
+}
+
+/* 创建多个圆形元素 */
+.circle:nth-child(odd) {
+  background-color: rgba(52, 152, 219, 0.8); /* 设置不同的颜色 */
+}
+
+.circle:nth-child(even) {
+  background-color: rgba(231, 76, 60, 0.8);
+}
+
+/* 设置内容文本 */
+.content {
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  z-index: 10; /* 确保内容在圆形元素之上 */
+}
+
+/* 使用伪元素在页面上生成多个圆形 */
+body::before, body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1; /* 保证圆形元素位于内容后面 */
+}
+
+/* 在伪元素中添加多个圆形元素 */
+body::before {
+  animation: generateCircles 10s infinite linear;
+}
+
+body::after {
+  animation: generateCircles 10s infinite linear;
+  animation-delay: 5s;
+}
+
+/* 动画随机生成圆形元素的位置 */
+@keyframes generateCircles {
+  0% {
+    content: '\25CB';
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    width: 40px;
+    height: 40px;
+}
+5% {
+    content: '\25CB';
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 50px;
+    height: 50px;
+}
+10% {
+    content: '\25CB';
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 40px;
+    height: 40px;
+}
+15% {
+    content: '\25CB';
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    width: 50px;
+    height: 50px;
+}
+20% {
+    content: '\25CB';
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+}
+25% {
+    content: '\25CB';
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    width: 50px;
+    height: 50px;
+}
+30% {
+    content: '\25CB';
+    position: absolute;
+    top: 60%;
+    left: 70%;
+    width: 40px;
+    height: 40px;
+}
+35% {
+    content: '\25CB';
+    position: absolute;
+    top: 70%;
+    left: 80%;
+    width: 50px;
+    height: 50px;
+}
+40% {
+    content: '\25CB';
+    position: absolute;
+    top: 80%;
+    left: 90%;
+    width: 60px;
+    height: 60px;
+}
+45% {
+    content: '\25CB';
+    position: absolute;
+    top: 90%;
+    left: 10%;
+    width: 40px;
+    height: 40px;
+}
+50% {
+    content: '\25CB';
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    width: 50px;
+    height: 50px;
+}
+55% {
+    content: '\25CB';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+}
+60% {
+    content: '\25CB';
+    position: absolute;
+    top: 40%;
+    left: 70%;
+    width: 60px;
+    height: 60px;
+}
+65% {
+    content: '\25CB';
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    width: 50px;
+    height: 50px;
+}
+70% {
+    content: '\25CB';
+    position: absolute;
+    top: 60%;
+    left: 90%;
+    width: 40px;
+    height: 40px;
+}
+75% {
+    content: '\25CB';
+    position: absolute;
+    top: 70%;
+    left: 10%;
+    width: 50px;
+    height: 50px;
+}
+80% {
+    content: '\25CB';
+    position: absolute;
+    top: 80%;
+    left: 20%;
+    width: 60px;
+    height: 60px;
+}
+85% {
+    content: '\25CB';
+    position: absolute;
+    top: 90%;
+    left: 30%;
+    width: 50px;
+    height: 50px;
+}
+90% {
+    content: '\25CB';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+}
+95% {
+    content: '\25CB';
+    position: absolute;
+    top: 20%;
+    left: 60%;
+    width: 50px;
+    height: 50px;
+}
+100% {
+    content: '\25CB';
+    position: absolute;
+    top: 30%;
+    left: 70%;
+    width: 40px;
+    height: 40px;
+
+  }
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #1e2657; /* 深色背景 */
   color: #ffffff; /* 白色字体 */
+  
 }
 
 .dashboard {
