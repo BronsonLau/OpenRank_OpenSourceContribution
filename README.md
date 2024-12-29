@@ -20,11 +20,16 @@ OpenRank开源数字生态分析与应用创新赛
 ### 目的：对数据进行处理，产生数据集
 ### 包含：所有对于csv数据处理的Python源代码、所产出的预处理完毕填入静态表格的数据集、机器学习使用代码及其预测结果 
 ### Composed By:[@BronsonLau](https://github.com/BronsonLau) <br> <br> <br>
-## 🖥 Folder:BigScreenTrying
+## 🖥 Folder:BigScreen
 ### 目的：制作可视化展示大屏（采用HTML\CSS\JavaScript 最原始的技术，依照幻灯片中所说，降低开源耗费资源与成本）
 ### 包含：制作可视化大屏所需要的文件
 ### Composed & Designed By:[@Jiu-956](https://github.com/Jiu-956) (The_Only_Team_Member)    
 ### Modified & Overseen By:[@BronsonLau](https://github.com/BronsonLau)<br> <br> <br>
+## 📄 Folder:Paper_From_Students'_View
+### Composed Mainly By:[@BronsonLau](https://github.com/BronsonLau)
+### Inspired & Instructed By:[@will-ww](https://github.com/will-ww)
+## 🖥 Folder:Videos
+### Recorded By:[@BronsonLau](https://github.com/BronsonLau) & [@Jiu-956](https://github.com/Jiu-956) (The_Only_Team_Member)    
 
 🌟 项目设想-Our Idea <br>
  --
