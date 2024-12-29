@@ -21,8 +21,8 @@ OpenRank开源数字生态分析与应用创新赛
 ### 包含：所有对于csv数据处理的Python源代码、所产出的预处理完毕填入静态表格的数据集、机器学习使用代码及其预测结果 
 ### Composed By:[@BronsonLau](https://github.com/BronsonLau) <br> <br> <br>
 ## 🖥 Folder:BigScreenTrying
-### 目的：制作可视化展示大屏（采用HTML\CSS\JavaScript 最原始的技术， 依照幻灯片中所说， 降低开源耗费资源与成本）
-### 包含：制作大屏所需要的文件
+### 目的：制作可视化展示大屏（采用HTML\CSS\JavaScript 最原始的技术，依照幻灯片中所说，降低开源耗费资源与成本）
+### 包含：制作可视化大屏所需要的文件
 ### Composed & Designed By:[@Jiu-956](https://github.com/Jiu-956) (The_Only_Team_Member)    
 ### Modified & Overseen By:[@BronsonLau](https://github.com/BronsonLau)<br> <br> <br>
 
@@ -31,12 +31,13 @@ OpenRank开源数字生态分析与应用创新赛
  ## 🖥 大屏
  ### 原始数据来源于Open-Digger的.json调用 与 Open-Digger所提取出的CSV文件
  ## 📃 论文
- ### 将开源现状进行融合计算机工程学与社会学的分析，数据与案例来源于Open-Digger的使用体验与参与开源的日常观察 <br> <br> <br>
+ ### 将开源现状进行融合计算机工程学与社会学的分析，进行本科生视角的深入洞察，数据与案例来源于Open-Digger的使用体验与参与开源的日常观察 <br> <br> <br>
 
 🫡 复赛成果组成-OutCome 
 -- 
 ## 可视化展示与搜索部分
 ### 大屏.jpg
+### 使用聚合平台技术展示屏幕.jpg （作为对照组）
 ### /BigScreenTrying
 ### /Videos/大屏介绍.mp4 <br> <br> 
 
