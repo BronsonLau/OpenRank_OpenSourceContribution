@@ -5,7 +5,7 @@ OpenRank开源数字生态分析与应用创新赛
 
 ### Team Members:柯宇[@BronsonLau](https://github.com/BronsonLau) (TeamLeader) :kissing_closed_eyes: FROM[@ECNU](https://github.com/ECNU)
 ### &nbsp;  &nbsp; &nbsp;   &nbsp;  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   王可楠[@Jiu-956](https://github.com/Jiu-956) (The_Only_Team_Member)  :satisfied: FROM[@ECNU](https://github.com/ECNU)
-###  We aim to Do the Project FUN&RIGHT During our working process <br> <br> <br>
+###  We aim to Do the Project FUN&RIGHT During our working process <br> <br> <br> <br> <br> 
 
 
 ⚠ 仓库组成-Our Repository <br> 
@@ -27,16 +27,16 @@ OpenRank开源数字生态分析与应用创新赛
 ### Modified & Overseen By:[@BronsonLau](https://github.com/BronsonLau)<br> <br> <br>
 ## 📄 Folder:Paper_From_Students'_View
 ### Composed Mainly By:[@BronsonLau](https://github.com/BronsonLau)
-### Inspired & Instructed By:[@will-ww](https://github.com/will-ww)
+### Inspired & Instructed By:[@will-ww](https://github.com/will-ww)<br> <br> <br>
 ## 🖥 Folder:Videos
-### Recorded By:[@BronsonLau](https://github.com/BronsonLau) & [@Jiu-956](https://github.com/Jiu-956) (The_Only_Team_Member)    
+### Recorded By:[@BronsonLau](https://github.com/BronsonLau) & [@Jiu-956](https://github.com/Jiu-956) (The_Only_Team_Member)    <br> <br> <br> <br> <br> 
 
 🌟 项目设想-Our Idea <br>
  --
  ## 🖥 大屏
- ### 原始数据来源于Open-Digger的.json调用 与 Open-Digger所提取出的CSV文件
+ ### 原始数据来源于Open-Digger的.json调用 与 Open-Digger所提取出的CSV文件 <br> <br>
  ## 📃 论文
- ### 将开源现状进行融合计算机工程学与社会学的分析，进行本科生视角的深入洞察，数据与案例来源于Open-Digger的使用体验与参与开源的日常观察 <br> <br> <br>
+ ### 将开源现状进行融合计算机工程学与社会学的分析，进行本科生视角的深入洞察，数据与案例来源于Open-Digger的使用体验与参与开源的日常观察 <br> <br> <br> <br> <br> 
 
 🫡 复赛成果组成-OutCome 
 -- 
