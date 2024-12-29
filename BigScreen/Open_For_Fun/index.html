@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenDigger可视化大屏</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+</head>
+
+<body>
+    <div class="dashboard">
+        <header>
+            <div class="header-left">
+                <h1>仓库以及个人操作数据展示可视化大屏</h1>
+            </div>
+            <div class="header-right">
+
+                <h2 style="color: aliceblue;">不知道叫什么才队</h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <h2 style="color: aliceblue;">大屏制作：王可楠  数据处理与分析：柯宇</h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="repo-name" id="repo-name">ant-design/ant-design</div>
+                <!-- X-lab2017/Open-Digger -->
+            </div>
+        </header>
+
+        <main>
+            <div class="left-column">
+                <div class="charts-container1">
+                    <div class="chart-item">
+                        <h3>项目语言分布</h3>
+                        <canvas id="language-chart-1"></canvas>
+                    </div>
+                    <div class="chart-item">
+                        <h3>项目Issues数量分布</h3>
+                        <canvas id="language-chart-2"></canvas>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>前100仓库活动数量排行</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>仓库名</th>
+                                    <th>数量</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 新的图表容器 -->
+
+                <!-- 图表轮播容器 -->
+                <div class="charts-container">
+                    <div class="carousel">
+                        <div class="card">
+                            <h2>一月提交数量统计</h2>
+                            <canvas id="createdDateChart"></canvas>
+                        </div>
+                        <div class="card">
+                            <h2>二月提交数量统计预测</h2>
+                            <canvas id="forecastChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-column">
+                <div class="chart-container">
+                    <div class="search-container">
+                        <select id="dataTypeSelector" class="data-type-select" onchange="updateChartTitle()">
+                            <option value="openrank">OpenRank</option>
+                            <option value="activity">活跃度</option>
+                            <option value="attention">关注度</option>
+                            <option value="stars">星标数据</option>
+                            <option value="technical_fork">技术分支</option>
+                            <option value="participants">参与者</option>
+                            <option value="new_contributors">新贡献者</option>
+                            <option value="inactive_contributors">非活跃贡献者</option>
+                            <option value="bus_factor">巴士因子</option>
+                            <option value="issues_new">新议题</option>
+                            <option value="issues_closed">已关闭议题</option>
+                            <option value="issue_comments">议题评论</option>
+                            <option value="code_change_lines_add">代码增加行数</option>
+                            <option value="code_change_lines_remove">代码删除行数</option>
+                            <option value="code_change_lines_sum">代码变更总行数</option>
+                            <option value="change_requests">变更请求</option>
+                            <option value="change_requests_accepted">已接受的变更请求</option>
+                            <option value="change_requests_reviews">变更请求审查</option>
+                        </select>
+                        <input type="text" placeholder="Enter GitHub repo (e.g. X-lab2017/open-digger)" id="repoInput">
+                        <button id="search-button" onclick="fetchData()">搜索</button>
+                    </div>
+
+                    <h2 id="chartTitle" style="text-align: center;">GitHub OpenRank Chart</h2>
+                    <div id="error"></div>
+
+                    <div class="chart-selector" data-chart-group="first">
+                        <button class="chart-button active" data-chart="year">年度图表</button>
+                        <button class="chart-button" data-chart="month">月度图表</button>
+                        <button class="chart-button" data-chart="quarter">季度图表</button>
+                    </div>
+
+                    <canvas id="openRankChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <div class="search-container">
+                        <select id="dataTypeSelector2" class="data-type-select" onchange="updateSecondChartTitle()">
+                            <option value="openrank">OpenRank</option>
+                            <option value="activity">活跃度</option>
+                        </select>
+                        <input type="text" placeholder="Enter GitHub username (e.g. frank-zsy)" id="userInput">
+                        <button id="search-button2" onclick="fetchUserData()">搜索</button>
+                    </div>
+
+                    <h2 id="chartTitle2" style="text-align: center;">GitHub User OpenRank Chart</h2>
+                    <div id="error2"></div>
+
+                    <div class="chart-selector" data-chart-group="second">
+                        <button class="chart-button active" data-chart="year" onclick="updateSecondChart('year')">年度图表</button>
+                        <button class="chart-button" data-chart="month" onclick="updateSecondChart('month')">月度图表</button>
+                        <button class="chart-button" data-chart="quarter" onclick="updateSecondChart('quarter')">季度图表</button>
+                    </div>
+
+                    <canvas id="userChart"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="charts.js"></script>
+</body>
+
+</html>
