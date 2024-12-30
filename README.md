@@ -20,7 +20,7 @@ OpenRank开源数字生态分析与应用创新赛
 ### [自制大屏.png](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/blob/main/%E8%87%AA%E5%88%B6%E5%A4%A7%E5%B1%8F.png)
 ### ![image](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/blob/main/%E8%87%AA%E5%88%B6%E5%A4%A7%E5%B1%8F.png)
 ### 洞察角度：[与基于聚合平台生成的展示屏幕.jpg](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/blob/main/%E4%BD%BF%E7%94%A8%E8%81%9A%E5%90%88%E5%B9%B3%E5%8F%B0%E6%8A%80%E6%9C%AF%E5%B1%95%E7%A4%BA%E5%B1%8F%E5%B9%95.jpg) 进行对比对照，达到预案中的自制大屏成本低、效果好的目的
-### ![image](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/blob/main/%E4%BD%BF%E7%94%A8%E8%81%9A%E5%90%88%E5%B9%B3%E5%8F%B0%E6%8A%80%E6%9C%AF%E5%B1%95%E7%A4%BA%E5%B1%8F%E5%B9%95.jpg))<br> <br> 
+### ![image](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/blob/main/%E4%BD%BF%E7%94%A8%E8%81%9A%E5%90%88%E5%B9%B3%E5%8F%B0%E6%8A%80%E6%9C%AF%E5%B1%95%E7%A4%BA%E5%B1%8F%E5%B9%95.jpg)<br> <br> 
 
 ## 论文部分
 ### /Paper_From_Students'_View/[基于OpenDigger开源实践的学科交叉性洞察.pdf](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/blob/main/Paper_From_Students'_View/%E5%9F%BA%E4%BA%8EOpenDigger%E5%BC%80%E6%BA%90%E5%AE%9E%E8%B7%B5%E7%9A%84%E5%AD%A6%E7%A7%91%E4%BA%A4%E5%8F%89%E6%80%A7%E6%B4%9E%E5%AF%9F.pdf)
