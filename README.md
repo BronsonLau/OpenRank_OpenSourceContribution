@@ -8,9 +8,35 @@ OpenRank开源数字生态分析与应用创新赛
 ###  We aim to Do the Project FUN&RIGHT During our working process <br> <br> <br> <br> <br> 
 
 
+🫡 复赛成果组成-OutCome <br> （使用方法请参照此README.md~）
+---
+## 综合视频展示部分
+### /videos 
+### 因为视频文件过大，提供[百度网盘链接]()于文件夹内 <br> <br> 
+
+## 大屏部分
+### /BigScreen/index.html
+### [自制大屏.jpg]()
+### 洞察角度：[与基于聚合平台生成的展示屏幕.jpg]() 进行对比对照，达到预案中的自制大屏成本低、效果好的目的 <br> <br> 
+
+## 论文部分
+### /Paper_From_Students'_View/[基于OpenDigger开源实践的学科交叉性洞察.pdf]()
+### 洞察角度：进行日常开源实践与开源社区、开源工具使用的问题发现与解决方案提出。<br> <br> 
+
+## 小彩蛋
+### [DJ版大屏]()：/BigScreen/Open_For_Fun/index.html
+### 开源体验：数据可视化处理休闲与激情的乐趣。<br> <br> 
+
+## 源代码部分
+### [/Data_Washing]() & [/BigScreen]()
+### 开源实践：记录数据处理、可视化实现的步步脚印。
+
+## 开源协作过程
+### 详情请查看此仓库提交动态~
+
+<br> <br> <br> <br> <br>
 ⚠ 仓库组成-Our Repository <br> 
 --- 
-
 ## 🍔 Folder:初赛
 ### 目的：提出小组项目方案与设想
 ### 包含：初赛幻灯片材料 
@@ -38,19 +64,6 @@ OpenRank开源数字生态分析与应用创新赛
  ## 📃 论文
  ### 将开源现状进行融合计算机工程学与社会学的分析，进行本科生视角的深入洞察，数据与案例来源于Open-Digger的使用体验与参与开源的日常观察 <br> <br> <br> <br> <br> 
 
-🫡 复赛成果组成-OutCome 
--- 
-## 可视化展示与搜索部分
-### 大屏.jpg
-### 使用聚合平台技术展示屏幕.jpg （作为对照组）
-### /BigScreen
-### /Videos/大屏介绍.mp4 <br> <br> 
 
-## 数据处理部分
-### /Data_Washing
-### /Videos/数据处理介绍.mp4 <br> <br>
 
-## 深入探索部分
-### /Paper_From_Students'_View/***.pdf
-### /Videos/论文与深入探索.mp4 <br> <br>
 
