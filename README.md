@@ -33,7 +33,7 @@ OpenRank开源数字生态分析与应用创新赛
 
 ## 👨‍💻源代码部分
 ### [/Data_Washing](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/tree/main/Data_Washing) & [/BigScreen](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/tree/main/BigScreen)
-### 开源实践：记录数据处理、可视化实现的步步脚印。
+### 开源实践：记录数据处理、可视化实现的步步脚印。<br> <br> 
 
 ## 🧑‍🤝‍🧑开源协作过程
 ### 详情请查看此仓库提交动态~
