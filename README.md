@@ -8,11 +8,11 @@ OpenRank开源数字生态分析与应用创新赛
 ###  We aim to Do the Project FUN&RIGHT During our working process <br> <br> <br> <br> <br> 
 
 
-🫡 复赛成果组成-OutCome <br> （使用方法请参照此README.md~）
+🫡 复赛成果组成-OutCome <br> （使用方法请参照此[README.md](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/blob/main/README.md)文档~）
 ---
 ## 📹综合视频展示部分
-### [/videos](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/tree/main/Videos(%E5%B1%95%E7%A4%BA%E8%A7%86%E9%A2%91)) 
-### [不知道叫什么才队-答辩演示文稿.pptx](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/blob/main/%E4%B8%8D%E7%9F%A5%E9%81%93%E5%8F%AB%E4%BB%80%E4%B9%88%E6%89%8D%E9%98%9F-%E7%AD%94%E8%BE%A9%E6%BC%94%E7%A4%BA%E6%96%87%E7%A8%BF.pptx)
+### [/videos](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/tree/main/%E5%A4%8D%E8%B5%9B/Videos(%E5%B1%95%E7%A4%BA%E8%A7%86%E9%A2%91))
+### [不知道叫什么才队-答辩演示文稿.pptx](https://github.com/BronsonLau/OpenRank_OpenSourceContribution/blob/main/%E5%A4%8D%E8%B5%9B/%E4%B8%8D%E7%9F%A5%E9%81%93%E5%8F%AB%E4%BB%80%E4%B9%88%E6%89%8D%E9%98%9F-%E7%AD%94%E8%BE%A9%E6%BC%94%E7%A4%BA%E6%96%87%E7%A8%BF.pptx)
 ### 因为视频文件过大，提供[百度网盘链接](https://pan.baidu.com/s/1tzVvUaMmoo81ULx-Ok0rgQ?pwd=wqt1)于文件夹内 <br> <br> 
 
 ## 💻大屏部分
