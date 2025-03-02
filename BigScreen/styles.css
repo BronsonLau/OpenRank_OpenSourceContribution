@@ -775,3 +775,127 @@ tbody {
   width: 100% !important;
   height: auto !important;
 }
+header {
+  padding: 12px 0; /* 原20px改为12px */
+  height: 60px; /* 新增固定高度 */
+}
+/* 调整标题容器 */
+.title-container {
+  margin-left: 30px; /* 向右移动标题 */
+}
+/* 修改logo圆角 */
+.logo-container {
+  border-radius: 14px; /* 原8px改为14px */
+  width: 50px;  /* 略微缩小容器 */
+  height: 50px;
+  padding: 6px; /* 增加内边距 */
+}
+/* 调整整体间距 */
+.header-left {
+  gap: 15px; /* 原20px缩小 */
+}
+/* 移动端适配调整 */
+@media (max-width: 767px) {
+  .title-container {
+    margin-left: 15px; /* 移动端右移幅度减少 */
+  }
+  
+  .logo-container {
+    border-radius: 10px; /* 移动端圆角适当减小 */
+    width: 36px;
+    height: 36px;
+  }
+  
+  h1 {
+    font-size: 1.5em !important; /* 进一步缩小移动端标题 */
+  }
+}
+
+/* 新增标题动画效果 */
+h1 {
+  position: relative;
+  left: 0;
+  transition: left 0.3s ease;
+}
+
+.header-left:hover h1 {
+  left: 8px; /* 悬停时产生微动效 */
+}
+.logo-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  overflow: hidden; /* 新增：裁剪溢出部分 */
+  padding: 0; /* 移除内边距 */
+  position: relative; /* 新增：定位基准 */
+}
+
+/* 修改图片样式 */
+.header-logo {
+  width: 100%;  /* 强制宽度填充 */
+  height: 100%; /* 强制高度填充 */
+  object-fit: cover; /* 关键属性：保持比例填充 */
+  position: absolute; /* 新增：绝对定位 */
+  top: 0;
+  left: 0;
+}
+
+/* 移动端适配 */
+@media (max-width: 767px) {
+  .logo-container {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+}
+.logo-container {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 平滑过渡 */
+  transform-origin: left center; /* 以左侧为中心缩放 */
+}
+
+.logo-container:hover {
+  transform: scale(1.2); /* 放大20% */
+  z-index: 10; /* 确保放大时覆盖其他元素 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 添加投影增强立体感 */
+}
+
+/* 防止放大时影响布局 */
+header {
+  position: relative; /* 建立定位上下文 */
+  z-index: 1;
+}
+
+/* 优化移动端体验 */
+@media (max-width: 767px) {
+  .logo-container:hover {
+    transform: scale(1.15); /* 移动端放大15% */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* 添加放大时的背景遮罩 */
+.logo-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.logo-container:hover::after {
+  opacity: 1;
+}
+
+/* 防止文字抖动 */
+.title-container {
+  transition: margin-left 0.3s;
+}
+
+.logo-container:hover + .title-container {
+  margin-left: 48px; /* 放大时标题右移补偿 */
+}
